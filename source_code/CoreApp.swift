@@ -11,7 +11,7 @@ import SwiftUI
 struct CoreApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            SelectedFrame()
         }
     }
 }
