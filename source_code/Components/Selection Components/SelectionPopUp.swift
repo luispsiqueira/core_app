@@ -8,11 +8,39 @@
 import SwiftUI
 
 struct SelectionPopUp: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
-}
+    @Environment(\.dismiss) var dismiss
+    @Binding var selection: [String]
 
-#Preview {
-    SelectionPopUp()
+    let columns = [GridItem(.flexible())]
+    var listElements: [String] = ["", ""]
+    var popOverText = "Thursday, 14 March 2024"
+
+    var body: some View {
+        VStack(alignment: .leading) {
+            Text(popOverText)
+                .font(.title3)
+                .padding(.horizontal)
+                .foregroundColor(.black)
+
+            Divider()
+
+            ScrollView {
+                LazyVGrid(columns: columns) {
+                    ForEach(listElements ?? [], id: \.self) { element in
+                        ZStack {
+                            Text(element)
+                                .padding(5)
+                                .onTapGesture {
+                                    selection.append(element)
+                                    print(selection)
+                                    dismiss()
+                                }
+                        }
+                    }
+                }.padding()
+            }
+        }
+        .padding(.vertical)
+        .background(Color.white)
+    }
 }

@@ -8,9 +8,21 @@
 import SwiftUI
 
 struct SelectedFrame: View {
+    @State private var isPopoverPresented: Bool = false
+    @State private var selectedSymptons: [String] = []
+
     var buttonText = "Adicionar sintoma"
     var titleText = "Seus sintomas de hoje"
-    var action: () -> Void = {}
+    var listElements: [String] = ["Seios sensíveis",
+                                  "Cólica",
+                                  "Dor de cabeça",
+                                  "Febre",
+                                  "Dor nas costas",
+                                  "Acne",
+                                  "Fadiga",
+                                  "Cansaço",
+                                  "Apetite descontrolado",
+                                  "Falta de apetite"]
 
     var body: some View {
         VStack {
@@ -34,8 +46,15 @@ struct SelectedFrame: View {
                 .padding(.top, 20)
                 .padding(.bottom, -10)
                 .foregroundColor(.white)
-            Button(buttonText) {
-                action()
+
+            Button(action: {
+                self.isPopoverPresented = true
+            }, label: {
+                Text(buttonText)
+            })
+            .popover(isPresented: $isPopoverPresented, arrowEdge: .trailing) {
+                SelectionPopUp(selection: $selectedSymptons, listElements: listElements)
+                    .frame(minWidth: 300, maxHeight: 400)
             }
             .buttonStyle(.plain)
             .foregroundColor(.blue)
