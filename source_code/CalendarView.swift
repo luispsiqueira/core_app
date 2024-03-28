@@ -14,7 +14,9 @@ struct CalendarView: View {
 
     var body: some View {
         ZStack {
-            RoundedRectangle(cornerRadius: 30) // .colorMultiply(CustomColors.calendarBackground.color)
+            RoundedRectangle(cornerRadius: 30)
+                .frame(width: 660, height: 644)
+            // .colorMultiply(CustomColors.calendarBackground.color)
             VStack(alignment: .leading, spacing: 40) {
                 VStack(spacing: 15) {
                     MonthComponent(month: $month, year: $year)
