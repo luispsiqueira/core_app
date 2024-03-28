@@ -32,10 +32,6 @@ struct SelectedFrame: View {
         return list
     }
 
-    private func generateCircle() -> Circle {
-        return Circle()
-    }
-
     var body: some View {
         VStack {
             Text(titleText)
@@ -45,12 +41,18 @@ struct SelectedFrame: View {
             ScrollView([.horizontal], showsIndicators: false) {
                 HStack(spacing: 12) {
                     if selectedElements.count == 0 {
-                        generateCircle()
+                        Image("asset1")
+                            .resizable()
                             .frame(width: 60, height: 60)
+                            .clipShape(Circle())
+                            .shadow(radius: 60)
                     } else {
                         ForEach(selectedElements, id: \.self) { _ in
-                            generateCircle()
+                            Image("asset2")
+                                .resizable()
                                 .frame(width: 60, height: 60)
+                                .clipShape(Circle())
+                                .shadow(radius: 60)
                         }
                     }
                 }
