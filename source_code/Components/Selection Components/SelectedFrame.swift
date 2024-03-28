@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SelectedFrame: View {
     @State private var isPopoverPresented: Bool = false
-    @State private var selectedSymptons: [String] = []
+    @State private var selectedElements: [String] = []
 
     var buttonText = "Adicionar sintoma"
     var titleText = "Seus sintomas de hoje"
@@ -24,6 +24,18 @@ struct SelectedFrame: View {
                                   "Apetite descontrolado",
                                   "Falta de apetite"]
 
+    private func generateDidTap() -> [Bool] {
+        var list: [Bool] = []
+        for _ in listElements {
+            list.append(false)
+        }
+        return list
+    }
+
+    private func generateCircle() -> Circle {
+        return Circle()
+    }
+
     var body: some View {
         VStack {
             Text(titleText)
@@ -32,15 +44,20 @@ struct SelectedFrame: View {
 
             ScrollView([.horizontal], showsIndicators: false) {
                 HStack(spacing: 12) {
-                    ForEach(0 ..< 150) { _ in
-                        Circle()
+                    if selectedElements.count == 0 {
+                        generateCircle()
                             .frame(width: 60, height: 60)
+                    } else {
+                        ForEach(selectedElements, id: \.self) { _ in
+                            generateCircle()
+                                .frame(width: 60, height: 60)
+                        }
                     }
                 }
             }
             .padding(.top, 16)
             .padding(.leading)
-            .frame(maxHeight: 50)
+            .frame(height: 50)
 
             Divider()
                 .padding(.top, 20)
@@ -53,7 +70,7 @@ struct SelectedFrame: View {
                 Text(buttonText)
             })
             .popover(isPresented: $isPopoverPresented, arrowEdge: .trailing) {
-                SelectionPopUp(selection: $selectedSymptons, listElements: listElements)
+                SelectionPopUp(selection: $selectedElements, didTap: generateDidTap(), listElements: listElements)
                     .frame(minWidth: 300, maxHeight: 400)
             }
             .buttonStyle(.plain)
