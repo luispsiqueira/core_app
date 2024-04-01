@@ -9,7 +9,13 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        SelectedFrame()
+        SelectedFrame(listElements: Mocks.Symptons.list,
+                      buttonText: Mocks.Symptons.buttonTitle,
+                      titleText: Mocks.Symptons.titleText)
+
+        SelectedFrame(listElements: Mocks.Mood.list,
+                      buttonText: Mocks.Mood.buttonTitle,
+                      titleText: Mocks.Mood.titleText)
     }
 }
 

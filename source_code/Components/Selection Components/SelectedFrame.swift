@@ -10,7 +10,7 @@ import SwiftUI
 struct SelectedFrame: View {
     @State private var isPopoverPresented: Bool = false
     @State private var selectedElements: [SelectionElement] = []
-    @State var listElements: [SelectionElement] = Mocks.generateSymptonsList()
+    @State var listElements: [SelectionElement] = Mocks.Symptons.list
 
     var buttonText = "Adicionar sintoma"
     var titleText = "Seus sintomas de hoje"
@@ -59,7 +59,6 @@ struct SelectedFrame: View {
 
             Button(action: {
                 self.isPopoverPresented = true
-                print(selectedElements.count)
             }, label: {
                 Text(buttonText)
             })
