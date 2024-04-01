@@ -25,7 +25,7 @@ struct DaysComponent: View {
     var year: Int
     var dayToAppearOnScreen: Int = 0
     @State var opacity = 1.0
-    @State var thereIsInput: Bool = false
+    @State var thereIsInput: Bool = true
 
     @Binding var dayClick: Int
     @Binding var monthClick: Int
@@ -39,31 +39,36 @@ struct DaysComponent: View {
         let opacityOfTheDay: Double = defineOpacity(type)
         let dayToUseOneCalendar: Int = defineDayToUse(day, month, year, lastDayInTheMonth, arrenge)
 
-        Button(action: {
-            print("dia \(dayToUseOneCalendar) foi clicado")
-        }, label: {
-            ZStack(alignment: .center) {
-                if dayToUseOneCalendar < 10 {
-                    Text("0\(dayToUseOneCalendar)")
-                        .font(.custom("Poppins", size: 16))
-                        .colorMultiply(.black)
-                } else if dayToUseOneCalendar >= 10 {
-                    Text("\(dayToUseOneCalendar)")
-                        .font(.custom("Poppins", size: 16))
-                        .colorMultiply(.black)
+        ZStack {
+            Button(action: {
+                print("dia \(dayToUseOneCalendar) foi clicado")
+            }, label: {
+                ZStack(alignment: .center) {
+                    if dayToUseOneCalendar < 10 {
+                        Text("0\(dayToUseOneCalendar)")
+                            .font(.custom("Poppins", size: 16))
+                            .colorMultiply(.black)
+                    } else if dayToUseOneCalendar >= 10 {
+                        Text("\(dayToUseOneCalendar)")
+                            .font(.custom("Poppins", size: 16))
+                            .colorMultiply(.black)
+                    }
                 }
-                
-                
-                if thereIsInput {
-                    
-                }
-            }.frame(width: 52, height: 68, alignment: .center)
-        })
-        .colorMultiply(colorOfTheDay)
-        .background(colorOfTheDay)
-        .frame(width: 52, height: 68, alignment: .center)
-        .cornerRadius(24)
-        .opacity(opacityOfTheDay)
+                .frame(width: 52, height: 68, alignment: .center)
+            })
+            .colorMultiply(colorOfTheDay)
+            .background(colorOfTheDay)
+            .frame(width: 52, height: 68, alignment: .center)
+            .cornerRadius(24)
+            .opacity(opacityOfTheDay)
+
+            if thereIsInput {
+                RoundedRectangle(cornerRadius: 26)
+                    .frame(width: 5, height: 6)
+                    .padding(.top, 42)
+                    .colorMultiply(.blue)
+            }
+        }
     }
 
     func arrangeOfTheDay(_ lastDay: Int) -> ArrangeDaysComponent {
@@ -75,7 +80,7 @@ struct DaysComponent: View {
     }
 
     // essa função precisa ser reestruturada quando o banco de dados for integrado, ela deve pegar
-    //a data da ultima menstruação e calcular a partir dela a proxima e salvar,
+    // a data da ultima menstruação e calcular a partir dela a proxima e salvar,
     // e com isso, pegar esse ultimo dado para calcular a proximo e assim por diante
     func verifyTheTypeOfTheDay(_: Int, _ month: Int, _: Int, _ lastDayInTheMonth: Int) -> TypeOfTheDays {
         // dados mocados que devem ser substituidos por dados do banco
