@@ -5,20 +5,37 @@
 //  Created by Caio Melloni dos Santos on 25/03/24.
 //
 
+import BackendLib
+import SwiftData
 import SwiftUI
 
 struct ContentView: View {
-    var body: some View {
-        SelectedFrame(listElements: Mocks.Symptons.list,
-                      buttonText: Mocks.Symptons.buttonTitle,
-                      titleText: Mocks.Symptons.titleText)
+    @State private var cycleService: CycleService
 
-        SelectedFrame(listElements: Mocks.Mood.list,
-                      buttonText: Mocks.Mood.buttonTitle,
-                      titleText: Mocks.Mood.titleText)
+    init(context: ModelContext) {
+        let cycleService = CycleService(context: context)
+        _cycleService = State(initialValue: cycleService)
     }
-}
 
-#Preview {
-    ContentView()
+    var body: some View {
+        VStack {
+            Button("create cycle") {
+                let cycle = cycleService.createCycle()
+                cycle.sympthoms?.append(CycleSymptom(day: Date(), symptom: .acne))
+            }
+            Button("fetch sympthom") {}
+            Button("add sympthom") {}
+            Image(systemName: "globe")
+                .imageScale(.large)
+                .foregroundStyle(.tint)
+            List {
+                ForEach(cycleService.cycles) { cycle in
+                    ForEach(cycle.sympthoms ?? []) { sym in
+                        Text(sym.symptom == .acne ? "acne" : "another one")
+                    }
+                }
+            }
+        }
+        .padding()
+    }
 }

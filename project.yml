@@ -2,6 +2,11 @@ name: CoreApp
 options:
   bundleIdPrefix: com
 
+packages:
+  BackendLib:
+    url: https://github.com/iodysseicos/backend_lib
+    branch: main
+
 configs:
   Debug.Dev: debug
   Debug.Prod: debug
@@ -53,3 +58,6 @@ targets:
                   echo "warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint"
                 fi
         name: Run SwiftLint
+
+    dependencies:
+      - package: BackendLib
