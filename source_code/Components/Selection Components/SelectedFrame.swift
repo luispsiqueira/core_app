@@ -9,20 +9,11 @@ import SwiftUI
 
 struct SelectedFrame: View {
     @State private var isPopoverPresented: Bool = false
-    @State private var selectedElements: [String] = []
+    @State private var selectedElements: [SelectionElement] = []
+    @State var listElements: [SelectionElement] = Mocks.generateSymptonsList()
 
     var buttonText = "Adicionar sintoma"
     var titleText = "Seus sintomas de hoje"
-    var listElements: [String] = ["Seios sensíveis",
-                                  "Cólica",
-                                  "Dor de cabeça",
-                                  "Febre",
-                                  "Dor nas costas",
-                                  "Acne",
-                                  "Fadiga",
-                                  "Cansaço",
-                                  "Apetite descontrolado",
-                                  "Falta de apetite"]
 
     private func generateDidTap() -> [Bool] {
         var list: [Bool] = []
@@ -68,11 +59,12 @@ struct SelectedFrame: View {
 
             Button(action: {
                 self.isPopoverPresented = true
+                print(selectedElements.count)
             }, label: {
                 Text(buttonText)
             })
             .popover(isPresented: $isPopoverPresented, arrowEdge: .trailing) {
-                SelectionPopUp(selection: $selectedElements, didTap: generateDidTap(), listElements: listElements)
+                SelectionPopUp(selection: $selectedElements, listElements: $listElements)
                     .frame(minWidth: 300, maxHeight: 400)
             }
             .buttonStyle(.plain)

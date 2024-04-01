@@ -9,11 +9,10 @@ import SwiftUI
 
 struct SelectionPopUp: View {
     @Environment(\.dismiss) var dismiss
-    @Binding var selection: [String]
-    @State var didTap: [Bool] = []
+    @Binding var selection: [SelectionElement]
+    @Binding var listElements: [SelectionElement]
 
     let columns = [GridItem(.flexible())]
-    var listElements: [String] = ["", ""]
     var popOverText = "Thursday, 14 March 2024"
 
     private func deleteElement(_ index: Int) {
@@ -34,14 +33,15 @@ struct SelectionPopUp: View {
             ScrollView {
                 LazyVGrid(columns: columns, spacing: 36) {
                     ForEach(listElements, id: \.self) { element in
-                        let index = listElements.firstIndex(of: element) ?? 0
-                        let didTapElement = didTap[index]
+                        var receivedElement = element
+                        let index = listElements.firstIndex(of: receivedElement) ?? 0
+                        let didTapElement = receivedElement.didTap
                         HStack(spacing: 10) {
                             Circle()
                                 .size(CGSize(width: 20, height: 20))
                                 .foregroundColor(didTapElement ? .pink : .black)
 
-                            Text(element)
+                            Text(element.selectionName)
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .alignmentGuide(.leading) { dimension in
                                     dimension[VerticalAlignment.center]
@@ -51,13 +51,12 @@ struct SelectionPopUp: View {
                             Spacer()
                         }
                         .onTapGesture {
+                            listElements[index].tap()
                             if didTapElement {
                                 deleteElement(index)
                             } else {
-                                selection.append(element)
+                                selection.append(receivedElement)
                             }
-                            didTap[index].toggle()
-                            print(selection)
                         }
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
