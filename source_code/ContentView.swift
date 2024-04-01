@@ -8,14 +8,22 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var dayClick: Int = Calendar.current.component(.day, from: Date())
+    @State var monthClick: Int = Calendar.current.component(.month, from: Date())
+    @State var yearClick: Int = Calendar.current.component(.year, from: Date())
+
     var body: some View {
-        VStack {
-            CalendarView(month: 3, year: 2024)
+        NavigationView {
+            List {
+                NavigationLink(destination: CalendarView(dayClick: $dayClick, monthClick: $monthClick, yearClick: $yearClick)) {
+                    Label("Calendar", systemImage: "calendar")
+                }
+            }.listStyle(.sidebar)
+                .navigationTitle("Sidebar")
         }
-        .padding()
     }
 }
 
-#Preview {
-    ContentView()
-}
+// #Preview {
+//    ContentView()
+// }

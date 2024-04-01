@@ -9,7 +9,7 @@ import Foundation
 
 struct CycleCalculation {
     // calcula daqui quantos dias será iniciado o próximo ciclo
-    func calculateWhenStartNextCycle(_ lastCyclesDuration: [Int]) -> Int {
+    func calculateDurationOfTheCycle(_ lastCyclesDuration: [Int]) -> Int {
         var allTheDuration = 0.0
         var cycles = 0.0
         for duration in lastCyclesDuration {
@@ -25,10 +25,12 @@ struct CycleCalculation {
         return Int(result)
     }
 
-    // com o resultado de quanto tempo o ciclo durará, obtido da função a cima, verifica em qual dia será a próxima menstruação
+    // com o resultado de quanto tempo o ciclo durará, obtido da função a cima,
+    // verifica em qual dia será a próxima menstruação
     // o dia, o mes e o ano são da data do inicio da ultima mesntruação
-    func calculateTheDayOfTheNextCycle(_ day: Int, _ month: Int, _ year: Int, _ duration: Int) -> (Int, Int, Int) {
+    func calculateTheDayOfTheNextCycle(_ day: Int, _ month: Int, _ year: Int, _ lastCyclesDuration: [Int]) -> (Int, Int, Int) {
         let lastDayOfThisMonth = getNumberOfDaysInAMonth(month, year) ?? 30
+        let duration = calculateDurationOfTheCycle(lastCyclesDuration)
         var dayOfTheNextStart = day + duration
         var monthOfTheNextStart = month
         var yearOfTheNextStart = year

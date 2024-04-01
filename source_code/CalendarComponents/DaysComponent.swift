@@ -7,11 +7,16 @@
 
 import SwiftUI
 
-enum TypesOfDays {
+enum ArrangeDaysComponent {
     case normalDay
     case dayFromAnotherMonth
+}
+
+enum TypeOfTheDays {
     case periodDays
     case fertileDays
+    case normalDay
+    case anotherMonth
 }
 
 struct DaysComponent: View {
@@ -20,41 +25,72 @@ struct DaysComponent: View {
     var year: Int
     var dayToAppearOnScreen: Int = 0
     @State var opacity = 1.0
+    @State var thereIsInput: Bool = false
+
+    @Binding var dayClick: Int
+    @Binding var monthClick: Int
+    @Binding var yearClick: Int
 
     var body: some View {
         let lastDayInTheMonth = CycleCalculation().getNumberOfDaysInAMonth(month, year) ?? 30
-        let type: TypesOfDays = checkTheTypeOfTheDay(lastDayInTheMonth)
+        let arrenge: ArrangeDaysComponent = arrangeOfTheDay(lastDayInTheMonth)
+        let type: TypeOfTheDays = verifyTheTypeOfTheDay(day, month, year, lastDayInTheMonth)
         let colorOfTheDay: Color = defineTheColorOfTheDay(type)
         let opacityOfTheDay: Double = defineOpacity(type)
-        let dayToUseOneCalendar: Int = defineDayToUse(day, month, year, lastDayInTheMonth, type)
+        let dayToUseOneCalendar: Int = defineDayToUse(day, month, year, lastDayInTheMonth, arrenge)
 
         Button(action: {
             print("dia \(dayToUseOneCalendar) foi clicado")
         }, label: {
             ZStack(alignment: .center) {
                 if dayToUseOneCalendar < 10 {
-                    Text(" 0\(dayToUseOneCalendar)")
+                    Text("0\(dayToUseOneCalendar)")
                         .font(.custom("Poppins", size: 16))
                         .colorMultiply(.black)
                 } else if dayToUseOneCalendar >= 10 {
-                    Text(" \(dayToUseOneCalendar)")
+                    Text("\(dayToUseOneCalendar)")
                         .font(.custom("Poppins", size: 16))
                         .colorMultiply(.black)
                 }
+                
+                
+                if thereIsInput {
+                    
+                }
             }.frame(width: 52, height: 68, alignment: .center)
         })
+        .colorMultiply(colorOfTheDay)
         .background(colorOfTheDay)
         .frame(width: 52, height: 68, alignment: .center)
         .cornerRadius(24)
-        .colorMultiply(colorOfTheDay)
         .opacity(opacityOfTheDay)
     }
 
-    func checkTheTypeOfTheDay(_ lastDay: Int) -> TypesOfDays {
-        if day < 1 {
+    func arrangeOfTheDay(_ lastDay: Int) -> ArrangeDaysComponent {
+        if day < 1 || day > lastDay {
             return .dayFromAnotherMonth
-        } else if day > lastDay {
-            return .dayFromAnotherMonth
+        } else {
+            return .normalDay
+        }
+    }
+
+    // essa função precisa ser reestruturada quando o banco de dados for integrado, ela deve pegar
+    //a data da ultima menstruação e calcular a partir dela a proxima e salvar,
+    // e com isso, pegar esse ultimo dado para calcular a proximo e assim por diante
+    func verifyTheTypeOfTheDay(_: Int, _ month: Int, _: Int, _ lastDayInTheMonth: Int) -> TypeOfTheDays {
+        // dados mocados que devem ser substituidos por dados do banco
+        var (dayStart, monthStart, yearStart) = (0, 0, 0)
+        if month - 1 == 3 {
+            (dayStart, monthStart, yearStart) = CycleCalculation().calculateTheDayOfTheNextCycle(14, 3, 2024, [28, 28, 25, 21, 28])
+        } else {
+            dayStart = -30
+        }
+        let durationOfThePeriod = 5
+
+        if day >= dayStart && day <= dayStart + durationOfThePeriod {
+            return .periodDays
+        } else if day < 1 || day > lastDayInTheMonth {
+            return .anotherMonth
         } else {
             return .normalDay
         }
@@ -68,10 +104,10 @@ struct DaysComponent: View {
         }
     }
 
-    func defineTheColorOfTheDay(_ type: TypesOfDays) -> Color {
+    func defineTheColorOfTheDay(_ type: TypeOfTheDays) -> Color {
         if type == .normalDay {
             return .white
-        } else if type == .dayFromAnotherMonth {
+        } else if type == .anotherMonth {
             return .white
         } else if type == .fertileDays {
             return CustomColors.calendarSubtitlePeriod.color
@@ -82,11 +118,11 @@ struct DaysComponent: View {
         }
     }
 
-    func defineOpacity(_ type: TypesOfDays) -> Double {
+    func defineOpacity(_ type: TypeOfTheDays) -> Double {
         switch type {
         case .normalDay:
             return 1.0
-        case .dayFromAnotherMonth:
+        case .anotherMonth:
             return 0.3
         case .periodDays:
             return 1.0
@@ -95,20 +131,16 @@ struct DaysComponent: View {
         }
     }
 
-    func defineDayToUse(_ day: Int, _ month: Int, _ year: Int, _ lastDay: Int, _ type: TypesOfDays) -> Int {
-        switch type {
+    func defineDayToUse(_ day: Int, _ month: Int, _ year: Int, _ lastDay: Int, _ arrange: ArrangeDaysComponent) -> Int {
+        switch arrange {
         case .normalDay:
             return day
         case .dayFromAnotherMonth:
             return getTheDayFromAnotherMonth(day, month, year, lastDay)
-        case .periodDays:
-            return 1
-        case .fertileDays:
-            return 1
         }
     }
 }
 
-#Preview {
-    DaysComponent(day: 1, month: 1, year: 2024)
-}
+// #Preview {
+//    DaysComponent(day: 1, month: 1, year: 2024)
+// }

@@ -13,12 +13,16 @@ struct WeekDaysComponent: View {
     var year: Int
     var weekDay: WeekDays
 
+    @Binding var dayClick: Int
+    @Binding var monthClick: Int
+    @Binding var yearClick: Int
+
     var body: some View {
         VStack(spacing: 20) {
             Text("\(weekDay.rawValue)")
                 .colorMultiply(CustomColors.calendarGray.color)
                 .font(.system(size: 14))
-            DaysComponent(day: day, month: month, year: year)
+            DaysComponent(day: day, month: month, year: year, dayClick: $dayClick, monthClick: $monthClick, yearClick: $yearClick)
         }
     }
 }
