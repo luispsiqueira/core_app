@@ -24,20 +24,18 @@ struct SelectedFrame: View {
     }
 
     var body: some View {
-        VStack {
-            Text(titleText)
-                .foregroundStyle(.white)
-                .padding(.top, 16)
+        VStack(spacing: 16) {
+            HStack {
+                Text(titleText)
+                    .foregroundStyle(Color(ColorName.Label))
+            }
+            .padding(.top, 8)
+            .padding(.bottom, selectedElements.count == 0 ? -4 : 0)
+            .padding(.leading, -160)
 
-            ScrollView([.horizontal], showsIndicators: false) {
-                HStack(spacing: 12) {
-                    if selectedElements.count == 0 {
-                        Image("asset1")
-                            .resizable()
-                            .frame(width: 60, height: 60)
-                            .clipShape(Circle())
-                            .shadow(radius: 60)
-                    } else {
+            VStack(spacing: 0) {
+                ScrollView([.horizontal], showsIndicators: false) {
+                    HStack(spacing: 12) {
                         ForEach(selectedElements, id: \.self) { _ in
                             Image("asset2")
                                 .resizable()
@@ -47,34 +45,36 @@ struct SelectedFrame: View {
                         }
                     }
                 }
-            }
-            .padding(.top, 16)
-            .padding(.leading)
-            .frame(height: 50)
+                .padding(.leading)
+                .padding(.top, -16)
+                .frame(height: selectedElements.count == 0 ? 0 : 60)
 
-            Divider()
-                .padding(.top, 20)
-                .padding(.bottom, -10)
-                .foregroundColor(.white)
+                Divider()
+                    .foregroundColor(Color(ColorName.Elements))
+                    .padding(.leading, 20)
+                    .padding(.trailing, 20)
 
-            Button(action: {
-                self.isPopoverPresented = true
-            }, label: {
-                Text(buttonText)
-            })
-            .popover(isPresented: $isPopoverPresented, arrowEdge: .trailing) {
-                SelectionPopUp(selection: $selectedElements, listElements: $listElements)
-                    .frame(minWidth: 300, maxHeight: 400)
+                Button(action: {
+                    self.isPopoverPresented = true
+                }, label: {
+                    Text(buttonText)
+                        .frame(width: 380, height: 20)
+                })
+                .popover(isPresented: $isPopoverPresented, arrowEdge: .trailing) {
+                    SelectionPopUp(selection: $selectedElements, listElements: $listElements)
+                        .frame(width: 300, height: 400)
+                }
+                .buttonStyle(.plain)
+                .foregroundColor(Color(ColorName.Button))
+                .frame(width: 380, height: 0)
+                .padding(.all, 16)
             }
-            .buttonStyle(.plain)
-            .foregroundColor(.blue)
-            .padding(.bottom, 0)
-            .frame(width: 380, height: 40)
         }
-        .frame(width: 380, height: 152)
+        .frame(width: 380, height: selectedElements.count == 0 ? 80 : 150)
         .contentShape(Rectangle())
-        .background(Color.black.opacity(0.6))
+        .background(Color.white.opacity(0.8))
         .cornerRadius(15)
+        .padding(.all, 16)
     }
 }
 
