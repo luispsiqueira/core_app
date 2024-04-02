@@ -18,24 +18,6 @@ struct ContentView: View {
     }
 
     var body: some View {
-        VStack {
-            Button("create cycle") {
-                let cycle = cycleService.createCycle()
-                cycle.sympthoms?.append(CycleSymptom(day: Date(), symptom: .acne))
-            }
-            Button("fetch sympthom") {}
-            Button("add sympthom") {}
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            List {
-                ForEach(cycleService.cycles) { cycle in
-                    ForEach(cycle.sympthoms ?? []) { sym in
-                        Text(sym.symptom == .acne ? "acne" : "another one")
-                    }
-                }
-            }
-        }
-        .padding()
+        SelectedFrame(listElements: Mocks.Mood.list, buttonText: Mocks.Mood.buttonTitle, titleText: Mocks.Mood.titleText)
     }
 }
