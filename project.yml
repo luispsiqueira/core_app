@@ -6,6 +6,9 @@ packages:
   BackendLib:
     url: https://github.com/iodysseicos/backend_lib
     branch: main
+  Assets:
+    url: https://github.com/iodysseicos/assets.git
+    branch: main
 
 configs:
   Debug.Dev: debug
@@ -61,3 +64,4 @@ targets:
 
     dependencies:
       - package: BackendLib
+      - package: Assets
