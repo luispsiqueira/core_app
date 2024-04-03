@@ -25,6 +25,7 @@ struct CoreApp: App {
                 Period.self,
                 CycleSymptom.self
             )
+//            container.deleteAllData()
 
         } catch {
             fatalError("Failed to create ModelContainer")

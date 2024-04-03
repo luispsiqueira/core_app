@@ -5,16 +5,19 @@
 //  Created by Luis Silva on 25/03/24.
 //
 
+import BackendLib
 import Foundation
 import SwiftUI
 
 struct CalendarComponent: View {
+    @State var cycleService: CycleService
+
     @State var month: Int
     @State var year: Int
 
-    @Binding var dayClick: Int
-    @Binding var monthClick: Int
-    @Binding var yearClick: Int
+    @Binding var dClick: Int
+    @Binding var mClick: Int
+    @Binding var yClick: Int
 
     var body: some View {
         ZStack {
@@ -27,12 +30,47 @@ struct CalendarComponent: View {
                     VStack(spacing: 8) {
                         let day = getTheWeekDayFromTheFirstDayOfTheMonth(month, year) ?? 0
 
-                        FirstLineDaysComponent(day: day, month: month, year: year, dayClick: $dayClick, monthClick: $monthClick, yearClick: $yearClick)
-                        OthersLineDaysComponent(day: day + 7, month: month, year: year, dayClick: $dayClick, monthClick: $monthClick, yearClick: $yearClick)
-                        OthersLineDaysComponent(day: day + 14, month: month, year: year, dayClick: $dayClick, monthClick: $monthClick, yearClick: $yearClick)
-                        OthersLineDaysComponent(day: day + 21, month: month, year: year, dayClick: $dayClick, monthClick: $monthClick, yearClick: $yearClick)
-                        OthersLineDaysComponent(day: day + 28, month: month, year: year, dayClick: $dayClick, monthClick: $monthClick, yearClick: $yearClick)
-                        OthersLineDaysComponent(day: day + 35, month: month, year: year, dayClick: $dayClick, monthClick: $monthClick, yearClick: $yearClick)
+                        FirstLineDaysComponent(cycleService: cycleService,
+                                               day: day,
+                                               month: month,
+                                               year: year,
+                                               dClick: $dClick,
+                                               mClick: $mClick,
+                                               yClick: $yClick)
+                        OthersLineDaysComponent(cycleService: cycleService,
+                                                day: day + 7,
+                                                month: month,
+                                                year: year,
+                                                dClick: $dClick,
+                                                mClick: $mClick,
+                                                yClick: $yClick)
+                        OthersLineDaysComponent(cycleService: cycleService,
+                                                day: day + 14,
+                                                month: month,
+                                                year: year,
+                                                dClick: $dClick,
+                                                mClick: $mClick,
+                                                yClick: $yClick)
+                        OthersLineDaysComponent(cycleService: cycleService,
+                                                day: day + 21,
+                                                month: month,
+                                                year: year,
+                                                dClick: $dClick,
+                                                mClick: $mClick,
+                                                yClick: $yClick)
+                        OthersLineDaysComponent(cycleService: cycleService,
+                                                day: day + 28,
+                                                month: month,
+                                                year: year,
+                                                dClick: $dClick,
+                                                mClick: $mClick,
+                                                yClick: $yClick)
+                        OthersLineDaysComponent(cycleService: cycleService,
+                                                day: day + 35, month: month,
+                                                year: year,
+                                                dClick: $dClick,
+                                                mClick: $mClick,
+                                                yClick: $yClick)
                     }
                 }
 
@@ -48,7 +86,6 @@ struct CalendarComponent: View {
         components.day = 1
         if let date = Calendar.current.date(from: components) {
             let weekday = Calendar.current.component(.weekday, from: date)
-            print(weekday)
 
             var weekdayToTheCalendarStartInTheCorrectDay = 1
             for _ in 1 ..< weekday {

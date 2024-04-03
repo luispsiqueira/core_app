@@ -5,13 +5,16 @@
 //  Created by Luis Silva on 01/04/24.
 //
 
+import BackendLib
 import SwiftUI
 
 struct CalendarView: View {
+    @State var cycleService: CycleService
+
     var userName: String = "Julia"
-    @Binding var dayClick: Int
-    @Binding var monthClick: Int
-    @Binding var yearClick: Int
+    @Binding var dClick: Int
+    @Binding var mClick: Int
+    @Binding var yClick: Int
 
     var monthToPass = Calendar.current.component(.month, from: Date())
     var yearToPass = Calendar.current.component(.year, from: Date())
@@ -23,12 +26,17 @@ struct CalendarView: View {
                 Text("Hello, \(userName)")
                     .font(.largeTitle)
 
-                CalendarComponent(month: monthToPass, year: yearToPass, dayClick: $dayClick, monthClick: $monthClick, yearClick: $yearClick)
+                CalendarComponent(cycleService: cycleService,
+                                  month: monthToPass,
+                                  year: yearToPass,
+                                  dClick: $dClick,
+                                  mClick: $mClick,
+                                  yClick: $yClick)
             }
         }
 //        }
         .navigationTitle("Calendar")
-        .onChange(of: dayClick) { _ in
+        .onChange(of: dClick) {
             // mudar a visao de baixo para o dia correto
         }
     }

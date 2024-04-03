@@ -21,7 +21,6 @@ struct MonthComponent: View {
                         month = 12
                         year -= 1
                     }
-                    print("o mês é \(month)")
                 }) {
                     Image(systemName: "chevron.backward")
                         .font(.system(size: 16))

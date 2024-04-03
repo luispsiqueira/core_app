@@ -10,7 +10,8 @@ import SwiftData
 import SwiftUI
 
 struct ContentView: View {
-    @State private var cycleService: CycleService
+    @State var cycleService: CycleService
+    // @Environment(\.modelContext) private var modelContext
 
     init(context: ModelContext) {
         let cycleService = CycleService(context: context)
@@ -18,17 +19,22 @@ struct ContentView: View {
     }
 
     @State var dayClick: Int = Calendar.current.component(.day, from: Date())
-    @State var monthClick: Int = Calendar.current.component(.month, from: Date())
-    @State var yearClick: Int = Calendar.current.component(.year, from: Date())
+    @State var mClick: Int = Calendar.current.component(.month, from: Date())
+    @State var yClick: Int = Calendar.current.component(.year, from: Date())
 
     var body: some View {
         NavigationView {
             List {
-                NavigationLink(destination: CalendarView(dayClick: $dayClick, monthClick: $monthClick, yearClick: $yearClick)) {
+                NavigationLink(destination: CalendarView(cycleService: cycleService,
+                                                         dClick: $dayClick,
+                                                         mClick: $mClick,
+                                                         yClick: $yClick))
+                {
                     Label("Calendar", systemImage: "calendar")
                 }
             }.listStyle(.sidebar)
                 .navigationTitle("Sidebar")
+                .onAppear {}
         }
     }
 }
