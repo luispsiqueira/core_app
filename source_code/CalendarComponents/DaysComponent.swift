@@ -40,13 +40,17 @@ struct DaysComponent: View {
         let type: TypeOfTheDays = verifyTheTypeOfTheDay(day, month, year, lastDayInTheMonth)
         let colorOfTheDay: Color = defineTheColorOfTheDay(type)
         let opacityOfTheDay: Double = defineOpacity(type)
-        let (dayToUseOneCalendar, _, _): (Int, Int, Int) = defineDayToUse(day, month, year, lastDayInTheMonth, arrenge)
+        let (dayToUseOneCalendar, monthToUseOnCalendar, yearToUseOnCalendar):
+            (Int, Int, Int) = defineDayToUse(day, month, year, lastDayInTheMonth, arrenge)
 
         ZStack {
             Button(action: {
-                print("dia \(dayToUseOneCalendar) foi clicado")
+                dClick = dayToUseOneCalendar
+                mClick = monthToUseOnCalendar
+                yClick = yearToUseOnCalendar
+//                print("dia \(dayToUseOneCalendar) foi clicado")
 //                CycleCalculation().createCycles(cycleService: cycleService)
-                CycleCalculation().printAllCycles(cycleService: cycleService)
+//                CycleCalculation().printAllCycles(cycleService: cycleService)
             }, label: {
                 ZStack(alignment: .center) {
                     if dayToUseOneCalendar < 10 {

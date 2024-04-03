@@ -38,6 +38,7 @@ struct CalendarView: View {
         .navigationTitle("Calendar")
         .onChange(of: dClick) {
             // mudar a visao de baixo para o dia correto
+            print("O dia clicado foi \(dClick)/\(mClick)/\(yClick)")
         }
     }
 }
