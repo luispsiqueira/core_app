@@ -28,7 +28,7 @@ struct SelectionPopUp: View {
             Text(popOverText)
                 .font(.title3)
                 .padding(.horizontal)
-                .foregroundColor(.black)
+                .foregroundColor(Color(ColorName.Label))
 
             Divider()
 
@@ -41,14 +41,16 @@ struct SelectionPopUp: View {
                         HStack(spacing: 10) {
                             Circle()
                                 .size(CGSize(width: 20, height: 20))
-                                .foregroundColor(didTapElement ? Color(ColorName.ButtonBackground) : .black)
+                                .foregroundColor(didTapElement ?
+                                    Color(ColorName.ButtonBackground) : Color(ColorName.Elements))
 
                             Text(element.selectionName)
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .alignmentGuide(.leading) { dimension in
                                     dimension[VerticalAlignment.center]
                                 }
-                                .foregroundColor(didTapElement ? Color(ColorName.ButtonBackground) : .black)
+                                .foregroundColor(didTapElement ?
+                                    Color(ColorName.ButtonBackground) : Color(ColorName.Elements))
 
                             Spacer()
                         }
@@ -74,8 +76,9 @@ struct SelectionPopUp: View {
             }
             .buttonStyle(.borderedProminent)
             .tint(Color(ColorName.ButtonBackground))
-            .frame(width: 80, height: 28)
-            .padding(.leading, 16)
+            .frame(width: 100, height: 28)
+            .padding([.leading, .trailing], 16)
+            .padding(.bottom, -8)
         }
         .padding(.vertical)
         .background(Color.white)
