@@ -5,6 +5,7 @@
 //  Created by Clissia Bozzer Bovi on 25/03/24.
 //
 
+import Assets
 import SwiftUI
 
 struct SelectedFrame: View {
@@ -37,7 +38,7 @@ struct SelectedFrame: View {
                 ScrollView([.horizontal], showsIndicators: false) {
                     HStack(spacing: 12) {
                         ForEach(selectedElements, id: \.self) { _ in
-                            Image("asset2")
+                            Images.pikachu.swiftUIImage
                                 .resizable()
                                 .frame(width: 60, height: 60)
                                 .clipShape(Circle())
