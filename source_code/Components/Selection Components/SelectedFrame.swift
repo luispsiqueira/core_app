@@ -61,8 +61,11 @@ struct SelectedFrame: View {
                         .frame(width: 380, height: 20)
                 })
                 .popover(isPresented: $isPopoverPresented, arrowEdge: .trailing) {
-                    SelectionPopUp(selection: $selectedElements, listElements: $listElements)
+                    SelectionPopUp(selection: $selectedElements,
+                                   listElements: $listElements,
+                                   selectedElements: selectedElements)
                         .frame(width: 300, height: 400)
+                        .interactiveDismissDisabled()
                 }
                 .buttonStyle(.plain)
                 .foregroundColor(Color(ColorName.Button))

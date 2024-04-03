@@ -11,4 +11,5 @@ enum ColorName {
     static let Label = "LabelColor"
     static let Elements = "GrayColor"
     static let Button = "ButtonColor"
+    static let ButtonBackground = "ButtonBackground"
 }
