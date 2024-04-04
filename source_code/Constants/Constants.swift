@@ -8,39 +8,6 @@
 import Foundation
 import SwiftUI
 
-enum CustomColors {
-    case calendarPrimary
-    case calendarGray
-    case calendarBackground
-    case calendarFertileDays
-    case calendarSubtitlePeriod
-    case calendarSubtitleFertileDays
-}
-
-extension CustomColors {
-    var color: Color {
-        switch self {
-        case .calendarPrimary:
-            return Color(red: 0.73, green: 0.63, blue: 0.87).opacity(0.8)
-
-        case .calendarGray:
-            return Color(red: 0.51, green: 0.51, blue: 0.51)
-
-        case .calendarBackground:
-            return Color(red: 0.733, green: 0.635, blue: 0.875)
-
-        case .calendarFertileDays:
-            return Color(red: 0.804, green: 0.741, blue: 0.910)
-
-        case .calendarSubtitlePeriod:
-            return Color(red: 1, green: 0, blue: 0).opacity(0.6)
-
-        case .calendarSubtitleFertileDays:
-            return Color(red: 0.733, green: 0.635, blue: 0.875)
-        }
-    }
-}
-
 enum Spacing: Int {
     case betweenDaysInCalendar = 31
 }

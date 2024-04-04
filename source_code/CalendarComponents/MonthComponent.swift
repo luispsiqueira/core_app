@@ -5,6 +5,7 @@
 //  Created by Luis Silva on 25/03/24.
 //
 
+import Assets
 import SwiftUI
 
 struct MonthComponent: View {
@@ -24,16 +25,16 @@ struct MonthComponent: View {
                 }) {
                     Image(systemName: "chevron.backward")
                         .font(.system(size: 16))
-                        .colorMultiply(CustomColors.calendarGray.color)
+                        .colorMultiply(Colors.gray_800)
                 }.buttonBorderShape(.circle)
 
                 VStack {
                     Text(getMonthName(month) ?? "January")
-                        .colorMultiply(CustomColors.calendarPrimary.color)
-                        .font(.system(size: 24))
+                        .colorMultiply(Colors.purple_400)
+                        .font(.system(size: 26))
                     Text(String(year))
                         .font(.system(size: 16))
-                        .colorMultiply(CustomColors.calendarGray.color)
+                        .colorMultiply(Colors.gray_800)
                 }
 
                 Button(action: {
@@ -46,7 +47,7 @@ struct MonthComponent: View {
                 }) {
                     Image(systemName: "chevron.forward")
                         .font(.system(size: 16))
-                        .colorMultiply(CustomColors.calendarGray.color)
+                        .colorMultiply(Colors.gray_800)
                 }.buttonBorderShape(.circle)
             }
         }

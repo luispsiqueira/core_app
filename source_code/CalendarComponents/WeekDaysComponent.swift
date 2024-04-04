@@ -5,6 +5,7 @@
 //  Created by Luis Silva on 25/03/24.
 //
 
+import Assets
 import BackendLib
 import SwiftUI
 
@@ -21,7 +22,7 @@ struct WeekDaysComponent: View {
     var body: some View {
         VStack(spacing: 20) {
             Text("\(weekDay.rawValue)")
-                .colorMultiply(CustomColors.calendarGray.color)
+                .colorMultiply(Colors.gray_800)
                 .font(.system(size: 14))
             DaysComponent(
                 cycleService: cycleService,

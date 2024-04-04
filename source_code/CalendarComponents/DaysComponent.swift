@@ -5,6 +5,7 @@
 //  Created by Luis Silva on 26/03/24.
 //
 
+import Assets
 import BackendLib
 import SwiftData
 import SwiftUI
@@ -43,9 +44,12 @@ struct DaysComponent: View {
         let checkIfIsToday = checkIfDayIsToday(day, month, year, type)
 
         ZStack {
-            RoundedRectangle(cornerRadius: 24)
+            Rectangle()
                 .frame(width: 52, height: 68, alignment: .center)
                 .colorMultiply(checkIfIsToday)
+                .background(colorOfTheDay)
+                .cornerRadius(24)
+
             Button(action: {
                 date = getADateToUseInTheFunctions(dayToUseOneCalendar, monthToUseOnCalendar, yearToUseOnCalendar)
             }, label: {
@@ -148,9 +152,9 @@ struct DaysComponent: View {
         } else if type == .anotherMonth {
             return .white
         } else if type == .fertileDays {
-            return CustomColors.calendarFertileDays.color
+            return Colors.blue_200
         } else if type == .periodDays {
-            return CustomColors.calendarSubtitlePeriod.color
+            return Colors.red_200
         } else {
             return .white
         }
@@ -222,11 +226,11 @@ struct DaysComponent: View {
             Calendar.current.component(.month, from: Date()) == month &&
             Calendar.current.component(.year, from: Date()) == year
         {
-            return .blue
+            return Colors.purple_600
         } else if type == .fertileDays {
-            return .white
+            return Colors.blue_200
         } else if type == .periodDays {
-            return .red
+            return Colors.red_200
         }
         return .white
     }

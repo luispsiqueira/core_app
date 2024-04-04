@@ -5,6 +5,7 @@
 //  Created by Luis Silva on 27/03/24.
 //
 
+import Assets
 import SwiftUI
 
 struct SubtitleComponent: View {
@@ -13,7 +14,7 @@ struct SubtitleComponent: View {
             HStack(spacing: 8) {
                 RoundedRectangle(cornerRadius: 24)
                     .frame(width: 16, height: 24)
-                    .colorMultiply(CustomColors.calendarSubtitlePeriod.color)
+                    .colorMultiply(Colors.red_200)
 
                 Text("Period")
                     .font(.custom("Poppins", size: 16))
@@ -23,7 +24,7 @@ struct SubtitleComponent: View {
             HStack(spacing: 8) {
                 RoundedRectangle(cornerRadius: 24)
                     .frame(width: 16, height: 24)
-                    .colorMultiply(CustomColors.calendarSubtitleFertileDays.color)
+                    .colorMultiply(Colors.blue_200)
 
                 Text("Fertile days")
                     .font(.custom("Poppins", size: 16))
