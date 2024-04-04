@@ -8,6 +8,7 @@
 import BackendLib
 import SwiftData
 import SwiftUI
+import Assets
 
 struct ContentView: View {
 //    @State var cycleService: CycleService
