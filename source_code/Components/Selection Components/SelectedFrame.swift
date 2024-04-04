@@ -6,8 +6,8 @@
 //
 
 import Assets
-import SwiftUI
 import BackendLib
+import SwiftUI
 
 struct SelectedFrame: View {
     @State private var isPopoverPresented: Bool = false
@@ -17,7 +17,7 @@ struct SelectedFrame: View {
     @State private var titleText = "Seus sintomas de hoje"
 
     var selectionType: SelectionType
-    var cycleService: Cycle
+    var cycle: Cycle
 
     private func setData() {
         let data = Mocks.getData(type: selectionType)
@@ -35,13 +35,9 @@ struct SelectedFrame: View {
         }
     }
 
-    private func saveSymptom() {
-        
-    }
+    private func saveSymptom() {}
 
-    private func saveMood() {
-        
-    }
+    private func saveMood() {}
 
     var body: some View {
         VStack(spacing: 16) {

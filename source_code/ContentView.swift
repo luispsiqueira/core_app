@@ -19,7 +19,7 @@ struct ContentView: View {
 
     var body: some View {
         let cycle = cycleService.createCycle()
-        SelectedFrame(selectionType: .mood)
-        SelectedFrame(selectionType: .symptons)
+        SelectedFrame(selectionType: .mood, cycle: cycle)
+        SelectedFrame(selectionType: .symptons, cycle: cycle)
     }
 }
