@@ -5,7 +5,6 @@
 //  Created by Caio Melloni dos Santos on 25/03/24.
 //
 
-import Assets
 import BackendLib
 import SwiftData
 import SwiftUI
