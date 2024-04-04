@@ -15,9 +15,10 @@ struct SelectedFrame: View {
     @State private var listElements: [SelectionElement] = []
     @State private var buttonText = "Adicionar sintoma"
     @State private var titleText = "Seus sintomas de hoje"
+    @State var cycle: Cycle
 
-    var selectionType: SelectionType
-    var cycle: Cycle
+    let selectionType: SelectionType
+    let date: Date
 
     private func setData() {
         let data = Mocks.getData(type: selectionType)
@@ -29,13 +30,21 @@ struct SelectedFrame: View {
     private func save() {
         switch selectionType {
         case .symptons:
-            print("")
+            saveSymptom()
         case .mood:
-            print("")
+            saveMood()
         }
     }
 
-    private func saveSymptom() {}
+    private func saveSymptom() {
+        var symptonsArray: [CycleSymptom] = []
+        for index in 0 ..< selectedElements.count {
+            let text = selectedElements[index].selectionName
+            let sympthom = CycleSymptom(day: date, symptom: SymptomCorrelation.getSymptomType(text))
+            symptonsArray.append(sympthom)
+        }
+        cycle.sympthoms? = symptonsArray
+    }
 
     private func saveMood() {}
 

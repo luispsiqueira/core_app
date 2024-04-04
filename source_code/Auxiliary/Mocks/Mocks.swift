@@ -24,16 +24,17 @@ enum Mocks {
 
         var buttonTitle: String = "Adicionar sintoma"
 
-        var list: [SelectionElement] = [SelectionElement(selectionName: "Seios sensíveis"),
-                                        SelectionElement(selectionName: "Cólica"),
-                                        SelectionElement(selectionName: "Dor de cabeça"),
-                                        SelectionElement(selectionName: "Febre"),
-                                        SelectionElement(selectionName: "Dor nas costas"),
-                                        SelectionElement(selectionName: "Acne"),
-                                        SelectionElement(selectionName: "Fadiga"),
-                                        SelectionElement(selectionName: "Cansaço"),
-                                        SelectionElement(selectionName: "Apetite descontrolado"),
-                                        SelectionElement(selectionName: "Falta de apetite")]
+        var list: [SelectionElement] = [SelectionElement(selectionName: SymptomCorrelation.getText(.sensitiveBreasts)),
+                                        SelectionElement(selectionName: SymptomCorrelation.getText(.cramp)),
+                                        SelectionElement(selectionName: SymptomCorrelation.getText(.headache)),
+                                        SelectionElement(selectionName: SymptomCorrelation.getText(.fever)),
+                                        SelectionElement(selectionName: SymptomCorrelation.getText(.backache)),
+                                        SelectionElement(selectionName: SymptomCorrelation.getText(.acne)),
+                                        SelectionElement(selectionName: SymptomCorrelation.getText(.nausea)),
+                                        SelectionElement(selectionName: SymptomCorrelation.getText(.tiredness)),
+                                        SelectionElement(selectionName: SymptomCorrelation.getText(.veryHungry)),
+                                        SelectionElement(selectionName: SymptomCorrelation.getText(.notHungry)),
+                                        SelectionElement(selectionName: SymptomCorrelation.getText(.insomnia))]
     }
 
     struct Mood: SelectionData {
