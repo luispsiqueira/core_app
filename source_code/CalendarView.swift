@@ -12,9 +12,7 @@ struct CalendarView: View {
     @State var cycleService: CycleService
 
     var userName: String = "Julia"
-    @Binding var dClick: Int
-    @Binding var mClick: Int
-    @Binding var yClick: Int
+    @Binding var date: Date
 
     var monthToPass = Calendar.current.component(.month, from: Date())
     var yearToPass = Calendar.current.component(.year, from: Date())
@@ -29,16 +27,14 @@ struct CalendarView: View {
                 CalendarComponent(cycleService: cycleService,
                                   month: monthToPass,
                                   year: yearToPass,
-                                  dClick: $dClick,
-                                  mClick: $mClick,
-                                  yClick: $yClick)
+                                  date: $date)
             }
         }
 //        }
         .navigationTitle("Calendar")
-        .onChange(of: dClick) {
+        .onChange(of: date) {
             // mudar a visao de baixo para o dia correto
-            print("O dia clicado foi \(dClick)/\(mClick)/\(yClick)")
+            print("O dia clicado foi \($date.wrappedValue)")
         }
     }
 }

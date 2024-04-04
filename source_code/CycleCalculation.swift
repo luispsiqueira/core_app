@@ -39,7 +39,7 @@ struct CycleCalculation {
         return (day, month, year)
     }
 
-    func verifyDaysOfNextCycles(_ today: Date, _ cycleService: CycleService, _ durationOfThePeriod: Int) -> Bool {
+    func verifyDaysOfStartNextCycles(_ today: Date, _ cycleService: CycleService, _ durationOfThePeriod: Int) -> Bool {
         let cyclesSorted = cycleService.cycles.sorted(by: { $0.startDate < $1.startDate })
         guard let startOfLastCycle = cyclesSorted.last?.startDate else { return false }
 
@@ -61,6 +61,23 @@ struct CycleCalculation {
             }
         }
 
+        return false
+    }
+
+    func verifyFertileNextDays(_ today: Date, _ cycleService: CycleService) -> Bool {
+        let cyclesSorted = cycleService.cycles.sorted(by: { $0.startDate < $1.startDate })
+        guard let startOfLastCycle = cyclesSorted.last?.startDate else { return false }
+
+        let duration = CycleCalculation().calculateDurationOfTheCycle(cyclesSorted) // duration of the cycle
+
+        let dateOfStartOfNextCycle = Calendar.current.date(byAdding: .day,
+                                                           value: duration,
+                                                           to: startOfLastCycle) ?? Date()
+        if Calendar.current.date(byAdding: .day, value: -13, to: dateOfStartOfNextCycle) ?? today <= today &&
+            Calendar.current.date(byAdding: .day, value: -7, to: dateOfStartOfNextCycle) ?? today >= today
+        {
+            return true
+        }
         return false
     }
 

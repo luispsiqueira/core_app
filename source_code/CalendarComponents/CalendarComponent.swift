@@ -15,9 +15,7 @@ struct CalendarComponent: View {
     @State var month: Int
     @State var year: Int
 
-    @Binding var dClick: Int
-    @Binding var mClick: Int
-    @Binding var yClick: Int
+    @Binding var date: Date
 
     var body: some View {
         ZStack {
@@ -34,43 +32,31 @@ struct CalendarComponent: View {
                                                day: day,
                                                month: month,
                                                year: year,
-                                               dClick: $dClick,
-                                               mClick: $mClick,
-                                               yClick: $yClick)
+                                               date: $date)
                         OthersLineDaysComponent(cycleService: cycleService,
                                                 day: day + 7,
                                                 month: month,
                                                 year: year,
-                                                dClick: $dClick,
-                                                mClick: $mClick,
-                                                yClick: $yClick)
+                                                date: $date)
                         OthersLineDaysComponent(cycleService: cycleService,
                                                 day: day + 14,
                                                 month: month,
                                                 year: year,
-                                                dClick: $dClick,
-                                                mClick: $mClick,
-                                                yClick: $yClick)
+                                                date: $date)
                         OthersLineDaysComponent(cycleService: cycleService,
                                                 day: day + 21,
                                                 month: month,
                                                 year: year,
-                                                dClick: $dClick,
-                                                mClick: $mClick,
-                                                yClick: $yClick)
+                                                date: $date)
                         OthersLineDaysComponent(cycleService: cycleService,
                                                 day: day + 28,
                                                 month: month,
                                                 year: year,
-                                                dClick: $dClick,
-                                                mClick: $mClick,
-                                                yClick: $yClick)
+                                                date: $date)
                         OthersLineDaysComponent(cycleService: cycleService,
                                                 day: day + 35, month: month,
                                                 year: year,
-                                                dClick: $dClick,
-                                                mClick: $mClick,
-                                                yClick: $yClick)
+                                                date: $date)
                     }
                 }
 

@@ -30,9 +30,7 @@ struct DaysComponent: View {
     @State var opacity = 1.0
     @State var thereIsInput: Bool = false
 
-    @Binding var dClick: Int
-    @Binding var mClick: Int
-    @Binding var yClick: Int
+    @Binding var date: Date
 
     var body: some View {
         let lastDayInTheMonth = CycleCalculation().getNumberOfDaysInAMonth(month, year) ?? 30
@@ -45,9 +43,8 @@ struct DaysComponent: View {
 
         ZStack {
             Button(action: {
-                dClick = dayToUseOneCalendar
-                mClick = monthToUseOnCalendar
-                yClick = yearToUseOnCalendar
+                date = getADateToUseInTheFunctions(dayToUseOneCalendar, monthToUseOnCalendar, yearToUseOnCalendar)
+                print(date)
 //                print("dia \(dayToUseOneCalendar) foi clicado")
 //                CycleCalculation().createCycles(cycleService: cycleService)
 //                CycleCalculation().printAllCycles(cycleService: cycleService)
@@ -106,11 +103,17 @@ struct DaysComponent: View {
                     Calendar.current.date(byAdding: .day, value: 5, to: cycle.startDate) ?? today >= today
                 {
                     return .periodDays
+                } else if Calendar.current.date(byAdding: .day, value: -13, to: cycle.startDate) ?? today <= today &&
+                    Calendar.current.date(byAdding: .day, value: -7, to: cycle.startDate) ?? today >= today
+                {
+                    return .fertileDays
                 }
             }
         } else { // se o dia for no futuro, tenta prever o que acontecerá
-            if CycleCalculation().verifyDaysOfNextCycles(today, cycleService, durationOfThePeriod) {
+            if CycleCalculation().verifyDaysOfStartNextCycles(today, cycleService, durationOfThePeriod) {
                 return .periodDays
+            } else if CycleCalculation().verifyFertileNextDays(today, cycleService) {
+                return .fertileDays
             }
         }
 
@@ -145,7 +148,7 @@ struct DaysComponent: View {
         } else if type == .anotherMonth {
             return .white
         } else if type == .fertileDays {
-            return CustomColors.calendarSubtitlePeriod.color
+            return CustomColors.calendarFertileDays.color
         } else if type == .periodDays {
             return CustomColors.calendarSubtitlePeriod.color
         } else {

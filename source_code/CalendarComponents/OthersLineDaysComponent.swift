@@ -16,9 +16,7 @@ struct OthersLineDaysComponent: View {
     var year: Int
 //    @Environment(\.modelContext) private var modelContext
 
-    @Binding var dClick: Int
-    @Binding var mClick: Int
-    @Binding var yClick: Int
+    @Binding var date: Date
 
     var body: some View {
         HStack(spacing: 31) {
@@ -26,51 +24,37 @@ struct OthersLineDaysComponent: View {
                           day: day + WeekDaysNumber.sunday.rawValue,
                           month: month,
                           year: year,
-                          dClick: $dClick,
-                          mClick: $mClick,
-                          yClick: $yClick)
+                          date: $date)
             DaysComponent(cycleService: cycleService,
                           day: day + WeekDaysNumber.monday.rawValue,
                           month: month,
                           year: year,
-                          dClick: $dClick,
-                          mClick: $mClick,
-                          yClick: $yClick)
+                          date: $date)
             DaysComponent(cycleService: cycleService,
                           day: day + WeekDaysNumber.tuesday.rawValue,
                           month: month,
                           year: year,
-                          dClick: $dClick,
-                          mClick: $mClick,
-                          yClick: $yClick)
+                          date: $date)
             DaysComponent(cycleService: cycleService,
                           day: day + WeekDaysNumber.wednesday.rawValue,
                           month: month,
                           year: year,
-                          dClick: $dClick,
-                          mClick: $mClick,
-                          yClick: $yClick)
+                          date: $date)
             DaysComponent(cycleService: cycleService,
                           day: day + WeekDaysNumber.thuesday.rawValue,
                           month: month,
                           year: year,
-                          dClick: $dClick,
-                          mClick: $mClick,
-                          yClick: $yClick)
+                          date: $date)
             DaysComponent(cycleService: cycleService,
                           day: day + WeekDaysNumber.friday.rawValue,
                           month: month,
                           year: year,
-                          dClick: $dClick,
-                          mClick: $mClick,
-                          yClick: $yClick)
+                          date: $date)
             DaysComponent(cycleService: cycleService,
                           day: day + WeekDaysNumber.saturday.rawValue,
                           month: month,
                           year: year,
-                          dClick: $dClick,
-                          mClick: $mClick,
-                          yClick: $yClick)
+                          date: $date)
         }
     }
 }

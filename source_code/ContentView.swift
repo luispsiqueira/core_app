@@ -18,17 +18,13 @@ struct ContentView: View {
         _cycleService = State(initialValue: cycleService)
     }
 
-    @State var dayClick: Int = Calendar.current.component(.day, from: Date())
-    @State var mClick: Int = Calendar.current.component(.month, from: Date())
-    @State var yClick: Int = Calendar.current.component(.year, from: Date())
+    @State var date: Date = .init()
 
     var body: some View {
         NavigationView {
             List {
                 NavigationLink(destination: CalendarView(cycleService: cycleService,
-                                                         dClick: $dayClick,
-                                                         mClick: $mClick,
-                                                         yClick: $yClick))
+                                                         date: $date))
                 {
                     Label("Calendar", systemImage: "calendar")
                 }

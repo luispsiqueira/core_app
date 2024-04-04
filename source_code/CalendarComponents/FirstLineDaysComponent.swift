@@ -15,9 +15,7 @@ struct FirstLineDaysComponent: View {
     var month: Int
     var year: Int
 
-    @Binding var dClick: Int
-    @Binding var mClick: Int
-    @Binding var yClick: Int
+    @Binding var date: Date
 
     var body: some View {
         HStack(spacing: 31) {
@@ -26,8 +24,8 @@ struct FirstLineDaysComponent: View {
                 day: day + WeekDaysNumber.sunday.rawValue,
                 month: month,
                 year: year,
-                weekDay: .sunday, dClick: $dClick, mClick: $mClick,
-                yClick: $yClick
+                weekDay: .sunday,
+                date: $date
             )
             WeekDaysComponent(
                 cycleService: cycleService,
@@ -35,9 +33,7 @@ struct FirstLineDaysComponent: View {
                 month: month,
                 year: year,
                 weekDay: .monday,
-                dClick: $dClick,
-                mClick: $mClick,
-                yClick: $yClick
+                date: $date
             )
             WeekDaysComponent(
                 cycleService: cycleService,
@@ -45,9 +41,7 @@ struct FirstLineDaysComponent: View {
                 month: month,
                 year: year,
                 weekDay: .tuesday,
-                dClick: $dClick,
-                mClick: $mClick,
-                yClick: $yClick
+                date: $date
             )
             WeekDaysComponent(
                 cycleService: cycleService,
@@ -55,9 +49,7 @@ struct FirstLineDaysComponent: View {
                 month: month,
                 year: year,
                 weekDay: .wednesday,
-                dClick: $dClick,
-                mClick: $mClick,
-                yClick: $yClick
+                date: $date
             )
             WeekDaysComponent(
                 cycleService: cycleService,
@@ -65,9 +57,7 @@ struct FirstLineDaysComponent: View {
                 month: month,
                 year: year,
                 weekDay: .thuesday,
-                dClick: $dClick,
-                mClick: $mClick,
-                yClick: $yClick
+                date: $date
             )
             WeekDaysComponent(
                 cycleService: cycleService,
@@ -75,9 +65,7 @@ struct FirstLineDaysComponent: View {
                 month: month,
                 year: year,
                 weekDay: .friday,
-                dClick: $dClick,
-                mClick: $mClick,
-                yClick: $yClick
+                date: $date
             )
             WeekDaysComponent(
                 cycleService: cycleService,
@@ -85,9 +73,7 @@ struct FirstLineDaysComponent: View {
                 month: month,
                 year: year,
                 weekDay: .saturday,
-                dClick: $dClick,
-                mClick: $mClick,
-                yClick: $yClick
+                date: $date
             )
         }
     }

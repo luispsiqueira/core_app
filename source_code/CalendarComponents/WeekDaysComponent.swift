@@ -16,9 +16,7 @@ struct WeekDaysComponent: View {
     var year: Int
     var weekDay: WeekDays
 
-    @Binding var dClick: Int
-    @Binding var mClick: Int
-    @Binding var yClick: Int
+    @Binding var date: Date
 
     var body: some View {
         VStack(spacing: 20) {
@@ -30,9 +28,7 @@ struct WeekDaysComponent: View {
                 day: day,
                 month: month,
                 year: year,
-                dClick: $dClick,
-                mClick: $mClick,
-                yClick: $yClick
+                date: $date
             )
         }
     }
