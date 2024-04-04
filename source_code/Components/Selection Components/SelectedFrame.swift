@@ -7,6 +7,7 @@
 
 import Assets
 import SwiftUI
+import BackendLib
 
 struct SelectedFrame: View {
     @State private var isPopoverPresented: Bool = false
@@ -15,17 +16,32 @@ struct SelectedFrame: View {
     @State private var buttonText = "Adicionar sintoma"
     @State private var titleText = "Seus sintomas de hoje"
 
-    var selectionType: SelectionType = .symptons
+    var selectionType: SelectionType
+    var cycleService: Cycle
 
-    private func generateDidTap() -> [Bool] {
-        var list: [Bool] = []
-        for _ in listElements {
-            list.append(false)
-        }
-        return list
+    private func setData() {
+        let data = Mocks.getData(type: selectionType)
+        listElements = data.list
+        buttonText = data.buttonTitle
+        titleText = data.titleText
     }
 
-    private func save() {}
+    private func save() {
+        switch selectionType {
+        case .symptons:
+            print("")
+        case .mood:
+            print("")
+        }
+    }
+
+    private func saveSymptom() {
+        
+    }
+
+    private func saveMood() {
+        
+    }
 
     var body: some View {
         VStack(spacing: 16) {
@@ -83,14 +99,7 @@ struct SelectedFrame: View {
         .cornerRadius(15)
         .padding(.all, 16)
         .onAppear(perform: {
-            let data = Mocks.getData(type: selectionType)
-            listElements = data.list
-            buttonText = data.buttonTitle
-            titleText = data.titleText
+            setData()
         })
     }
-}
-
-#Preview {
-    SelectedFrame()
 }

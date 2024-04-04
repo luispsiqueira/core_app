@@ -18,6 +18,7 @@ struct ContentView: View {
     }
 
     var body: some View {
+        let cycle = cycleService.createCycle()
         SelectedFrame(selectionType: .mood)
         SelectedFrame(selectionType: .symptons)
     }
