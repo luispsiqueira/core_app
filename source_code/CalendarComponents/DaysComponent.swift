@@ -40,14 +40,14 @@ struct DaysComponent: View {
         let opacityOfTheDay: Double = defineOpacity(type)
         let (dayToUseOneCalendar, monthToUseOnCalendar, yearToUseOnCalendar):
             (Int, Int, Int) = defineDayToUse(day, month, year, lastDayInTheMonth, arrenge)
+        let checkIfIsToday = checkIfDayIsToday(day, month, year, type)
 
         ZStack {
+            RoundedRectangle(cornerRadius: 24)
+                .frame(width: 52, height: 68, alignment: .center)
+                .colorMultiply(checkIfIsToday)
             Button(action: {
                 date = getADateToUseInTheFunctions(dayToUseOneCalendar, monthToUseOnCalendar, yearToUseOnCalendar)
-                print(date)
-//                print("dia \(dayToUseOneCalendar) foi clicado")
-//                CycleCalculation().createCycles(cycleService: cycleService)
-//                CycleCalculation().printAllCycles(cycleService: cycleService)
             }, label: {
                 ZStack(alignment: .center) {
                     if dayToUseOneCalendar < 10 {
@@ -60,11 +60,11 @@ struct DaysComponent: View {
                             .colorMultiply(.black)
                     }
                 }
-                .frame(width: 52, height: 68, alignment: .center)
+                .frame(width: 44, height: 60, alignment: .center)
             })
             .colorMultiply(colorOfTheDay)
             .background(colorOfTheDay)
-            .frame(width: 52, height: 68, alignment: .center)
+            .frame(width: 44, height: 60, alignment: .center)
             .cornerRadius(24)
             .opacity(opacityOfTheDay)
 
@@ -215,6 +215,20 @@ struct DaysComponent: View {
         }
 
         return date
+    }
+
+    func checkIfDayIsToday(_ day: Int, _ month: Int, _ year: Int, _ type: TypeOfTheDays) -> Color {
+        if Calendar.current.component(.day, from: Date()) == day &&
+            Calendar.current.component(.month, from: Date()) == month &&
+            Calendar.current.component(.year, from: Date()) == year
+        {
+            return .blue
+        } else if type == .fertileDays {
+            return .white
+        } else if type == .periodDays {
+            return .red
+        }
+        return .white
     }
 }
 
