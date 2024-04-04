@@ -18,6 +18,7 @@ struct ContentView: View {
     }
 
     var body: some View {
-        SelectedFrame(listElements: Mocks.Mood.list, buttonText: Mocks.Mood.buttonTitle, titleText: Mocks.Mood.titleText)
+        SelectedFrame(selectionType: .mood)
+        SelectedFrame(selectionType: .symptons)
     }
 }

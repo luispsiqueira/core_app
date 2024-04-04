@@ -7,44 +7,64 @@
 
 import Foundation
 
+enum SelectionType {
+    case symptons
+    case mood
+}
+
+protocol SelectionData {
+    var titleText: String { get set }
+    var buttonTitle: String { get set }
+    var list: [SelectionElement] { get set }
+}
+
 enum Mocks {
-    enum Symptons {
-        static var titleText: String = "Seus sintomas de hoje"
+    struct Symptons: SelectionData {
+        var titleText: String = "Seus sintomas de hoje"
 
-        static var buttonTitle: String = "Adicionar sintoma"
+        var buttonTitle: String = "Adicionar sintoma"
 
-        static var list: [SelectionElement] = [SelectionElement(selectionName: "Seios sensíveis"),
-                                               SelectionElement(selectionName: "Cólica"),
-                                               SelectionElement(selectionName: "Dor de cabeça"),
-                                               SelectionElement(selectionName: "Febre"),
-                                               SelectionElement(selectionName: "Dor nas costas"),
-                                               SelectionElement(selectionName: "Acne"),
-                                               SelectionElement(selectionName: "Fadiga"),
-                                               SelectionElement(selectionName: "Cansaço"),
-                                               SelectionElement(selectionName: "Apetite descontrolado"),
-                                               SelectionElement(selectionName: "Falta de apetite")]
+        var list: [SelectionElement] = [SelectionElement(selectionName: "Seios sensíveis"),
+                                        SelectionElement(selectionName: "Cólica"),
+                                        SelectionElement(selectionName: "Dor de cabeça"),
+                                        SelectionElement(selectionName: "Febre"),
+                                        SelectionElement(selectionName: "Dor nas costas"),
+                                        SelectionElement(selectionName: "Acne"),
+                                        SelectionElement(selectionName: "Fadiga"),
+                                        SelectionElement(selectionName: "Cansaço"),
+                                        SelectionElement(selectionName: "Apetite descontrolado"),
+                                        SelectionElement(selectionName: "Falta de apetite")]
     }
 
-    enum Mood {
-        static var titleText: String = "Seu humor de hoje"
+    struct Mood: SelectionData {
+        var titleText: String = "Seu humor de hoje"
 
-        static var buttonTitle: String = "Adicionar humor"
+        var buttonTitle: String = "Adicionar humor"
 
-        static var list: [SelectionElement] = [SelectionElement(selectionName: "Humor"),
-                                               SelectionElement(selectionName: "Calmo"),
-                                               SelectionElement(selectionName: "Feliz"),
-                                               SelectionElement(selectionName: "Enérgico"),
-                                               SelectionElement(selectionName: "Alegre"),
-                                               SelectionElement(selectionName: "Sonolento"),
-                                               SelectionElement(selectionName: "Irritado"),
-                                               SelectionElement(selectionName: "Ansioso"),
-                                               SelectionElement(selectionName: "Triste"),
-                                               SelectionElement(selectionName: "Desanimado"),
-                                               SelectionElement(selectionName: "Pensamentos obsessivos"),
-                                               SelectionElement(selectionName: "Pouca energia"),
-                                               SelectionElement(selectionName: "Apático"),
-                                               SelectionElement(selectionName: "Confuso"),
-                                               SelectionElement(selectionName: "Muito autocrítica"),
-                                               SelectionElement(selectionName: "Emocionada")]
+        var list: [SelectionElement] = [SelectionElement(selectionName: "Humor"),
+                                        SelectionElement(selectionName: "Calmo"),
+                                        SelectionElement(selectionName: "Feliz"),
+                                        SelectionElement(selectionName: "Enérgico"),
+                                        SelectionElement(selectionName: "Alegre"),
+                                        SelectionElement(selectionName: "Sonolento"),
+                                        SelectionElement(selectionName: "Irritado"),
+                                        SelectionElement(selectionName: "Ansioso"),
+                                        SelectionElement(selectionName: "Triste"),
+                                        SelectionElement(selectionName: "Desanimado"),
+                                        SelectionElement(selectionName: "Pensamentos obsessivos"),
+                                        SelectionElement(selectionName: "Pouca energia"),
+                                        SelectionElement(selectionName: "Apático"),
+                                        SelectionElement(selectionName: "Confuso"),
+                                        SelectionElement(selectionName: "Muito autocrítica"),
+                                        SelectionElement(selectionName: "Emocionada")]
+    }
+
+    static func getData(type: SelectionType) -> SelectionData {
+        switch type {
+        case .symptons:
+            return Symptons()
+        case .mood:
+            return Mood()
+        }
     }
 }

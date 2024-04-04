@@ -11,10 +11,11 @@ import SwiftUI
 struct SelectedFrame: View {
     @State private var isPopoverPresented: Bool = false
     @State private var selectedElements: [SelectionElement] = []
-    @State var listElements: [SelectionElement] = Mocks.Symptons.list
+    @State private var listElements: [SelectionElement] = []
+    @State private var buttonText = "Adicionar sintoma"
+    @State private var titleText = "Seus sintomas de hoje"
 
-    var buttonText = "Adicionar sintoma"
-    var titleText = "Seus sintomas de hoje"
+    var selectionType: SelectionType = .symptons
 
     private func generateDidTap() -> [Bool] {
         var list: [Bool] = []
@@ -23,6 +24,8 @@ struct SelectedFrame: View {
         }
         return list
     }
+
+    private func save() {}
 
     var body: some View {
         VStack(spacing: 16) {
@@ -79,6 +82,12 @@ struct SelectedFrame: View {
         .background(Color.white.opacity(0.8))
         .cornerRadius(15)
         .padding(.all, 16)
+        .onAppear(perform: {
+            let data = Mocks.getData(type: selectionType)
+            listElements = data.list
+            buttonText = data.buttonTitle
+            titleText = data.titleText
+        })
     }
 }
 
