@@ -28,6 +28,8 @@ struct ContentView: View {
                 }
             }.listStyle(.sidebar)
         }
+        //let cycle = cycleService.createCycle(startDate: Date(), endDate: Date())
+        //SelectedFrame(cycle: cycle, cycleService: cycleService, selectionType: .symptons, date: Date())
     }
 }
 
