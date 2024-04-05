@@ -15,7 +15,7 @@ struct BallComponent: View {
 
     var body: some View {
         let dayOfTheCicle = calculateDayOfTheCycle(cycleService)
-        
+
         ZStack {
             Circle()
                 .frame(width: 272, height: 272)
@@ -46,15 +46,14 @@ struct BallComponent: View {
             }
         }
     }
-    
-    func calculateDayOfTheCycle(_ cycleServise: CycleService) -> Int {
-        
+
+    func calculateDayOfTheCycle(_: CycleService) -> Int {
         // continuar aqui
-        
+
         return 0
     }
 }
 
-//#Preview {
+// #Preview {
 //    BallComponent(cycleService: cycle, dayOfTheCicle: 1, phase: .period)
-//}
+// }
