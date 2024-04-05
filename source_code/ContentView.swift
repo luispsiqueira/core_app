@@ -21,5 +21,6 @@ struct ContentView: View {
         let cycle = cycleService.createCycle(startDate: Date(), endDate: Date())
         SelectedFrame(cycle: cycle, selectionType: .symptons, date: Date())
         SelectedFrame(cycle: cycle, selectionType: .mood, date: Date())
+        LibidoIntensityFrame()
     }
 }
