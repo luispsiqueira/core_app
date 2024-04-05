@@ -22,5 +22,6 @@ struct ContentView: View {
         SelectedFrame(cycle: cycle, selectionType: .symptons, date: Date())
         SelectedFrame(cycle: cycle, selectionType: .mood, date: Date())
         LibidoIntensityFrame()
+        FlowPeriodIntensity()
     }
 }
