@@ -10,12 +10,15 @@ import SwiftData
 import SwiftUI
 
 struct ContentView: View {
-    @State private var cycleService: CycleService
+    @State var cycleService: CycleService
+    // @Environment(\.modelContext) private var modelContext
 
     init(context: ModelContext) {
         let cycleService = CycleService(context: context)
         _cycleService = State(initialValue: cycleService)
     }
+
+    @State var date: Date = .init()
 
     var body: some View {
         let cycle = cycleService.createCycle()
@@ -23,3 +26,7 @@ struct ContentView: View {
         SelectedFrame(cycle: cycle, selectionType: .mood, date: Date())
     }
 }
+
+// #Preview {
+//    ContentView()
+// }
