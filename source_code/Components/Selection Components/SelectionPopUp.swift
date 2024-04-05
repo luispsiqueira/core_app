@@ -35,6 +35,16 @@ struct SelectionPopUp: View {
         }
     }
 
+    private func getSympthomType(_ index: Int) -> SymptomType {
+        let text = removedElements[index].selectionName
+        return SymptomCorrelation.getSymptomType(text)
+    }
+
+    private func getMoodType(_ index: Int) -> MoodType {
+        let text = selectedElements[index].selectionName
+        return MoodCorrelation.getMoodType(text)
+    }
+
     private func save() {
         switch selectionType {
         case .symptons:
@@ -48,13 +58,18 @@ struct SelectionPopUp: View {
 
     private func deleteSymptom() {
         for index in 0 ..< removedElements.count {
-            let text = removedElements[index].selectionName
-            let sympthomType = SymptomCorrelation.getSymptomType(text)
+            let sympthomType = getSympthomType(index)
             cycleService.removeSympthom(cycle: cycle, symptom: sympthomType, date: date)
         }
     }
 
-    private func deleteMood() {}
+    private func deleteMood() {
+        for index in 0 ..< removedElements.count {
+            let text = removedElements[index].selectionName
+            let moodType = MoodCorrelation.getMoodType(text)
+            cycleService.removeMood(cycle: cycle, moodType: moodType, date: date)
+        }
+    }
 
     private func saveSymptom() {
         for index in 0 ..< selectedElements.count {
@@ -64,7 +79,12 @@ struct SelectionPopUp: View {
         }
     }
 
-    private func saveMood() {}
+    private func saveMood() {
+        for index in 0 ..< selectedElements.count {
+            let moodType = getMoodType(index)
+            cycleService.addMood(cycle: cycle, moodType: moodType, date: date)
+        }
+    }
 
     var body: some View {
         VStack(alignment: .leading) {
