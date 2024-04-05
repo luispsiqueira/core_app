@@ -21,17 +21,9 @@ struct ContentView: View {
     @State var date: Date = .init()
 
     var body: some View {
-        NavigationView {
-            List {
-                NavigationLink(destination: CalendarView(cycleService: cycleService,
-                                                         date: $date))
-                {
-                    Label("Calendar", systemImage: "calendar")
-                }
-            }.listStyle(.sidebar)
-                .navigationTitle("Sidebar")
-                .onAppear {}
-        }
+        let cycle = cycleService.createCycle()
+        SelectedFrame(cycle: cycle, selectionType: .symptons, date: Date())
+        SelectedFrame(cycle: cycle, selectionType: .mood, date: Date())
     }
 }
 
