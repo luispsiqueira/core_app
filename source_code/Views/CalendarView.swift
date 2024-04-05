@@ -8,6 +8,11 @@
 import SwiftUI
 
 struct CalendarView: View {
+    @Binding var date: Date
+
+    var monthToPass = Calendar.current.component(.month, from: Date())
+    var yearToPass = Calendar.current.component(.year, from: Date())
+
     var body: some View {
         ScrollView {
             HStack {
@@ -18,8 +23,11 @@ struct CalendarView: View {
 
                     HStack {
                         // Calendar
-                        RoundedRectangle(cornerRadius: 10)
-                            .frame(width: 460, height: 370)
+//                        RoundedRectangle(cornerRadius: 10)
+//                            .frame(width: 460, height: 370)
+                        CalendarComponent(month: monthToPass,
+                                          year: yearToPass,
+                                          date: $date)
 
                         VStack(alignment: .leading) {
                             // Begin cycle
