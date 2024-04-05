@@ -14,21 +14,21 @@ struct SubtitleComponent: View {
             HStack(spacing: 8) {
                 RoundedRectangle(cornerRadius: 24)
                     .frame(width: 16, height: 24)
-                    .colorMultiply(Colors.red_200)
+                    .foregroundColor(Colors.red_200)
 
                 Text("Period")
                     .font(.custom("Poppins", size: 16))
-                    .colorMultiply(.black).opacity(0.6)
+                    .foregroundColor(.black).opacity(0.6)
             }
 
             HStack(spacing: 8) {
                 RoundedRectangle(cornerRadius: 24)
                     .frame(width: 16, height: 24)
-                    .colorMultiply(Colors.blue_200)
+                    .foregroundColor(Colors.blue_200)
 
                 Text("Fertile days")
                     .font(.custom("Poppins", size: 16))
-                    .colorMultiply(.black).opacity(0.6)
+                    .foregroundColor(.black).opacity(0.6)
             }
         }
     }

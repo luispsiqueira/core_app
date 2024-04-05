@@ -33,6 +33,16 @@ struct DaysComponent: View {
 
     @Binding var date: Date
 
+    init(context: ModelContext, day: Int, month: Int, year: Int, date: Binding<Date>) {
+        self.day = day
+        self.month = month
+        self.year = year
+        _date = date
+
+        cycleService = CycleService(context: context)
+        _cycleService = State(initialValue: cycleService)
+    }
+
     var body: some View {
         let lastDayInTheMonth = CycleCalculation().getNumberOfDaysInAMonth(month, year) ?? 30
         let arrenge: ArrangeDaysComponent = arrangeOfTheDay(lastDayInTheMonth)
@@ -46,12 +56,13 @@ struct DaysComponent: View {
         ZStack {
             Rectangle()
                 .frame(width: 52, height: 68, alignment: .center)
-                .colorMultiply(checkIfIsToday)
+                .foregroundColor(checkIfIsToday)
                 .background(colorOfTheDay)
                 .cornerRadius(24)
 
             Button(action: {
                 date = getADateToUseInTheFunctions(dayToUseOneCalendar, monthToUseOnCalendar, yearToUseOnCalendar)
+//                CycleCalculation().createCycles(cycleService: cycleService)
             }, label: {
                 ZStack(alignment: .center) {
                     if dayToUseOneCalendar < 10 {
@@ -148,15 +159,15 @@ struct DaysComponent: View {
 
     func defineTheColorOfTheDay(_ type: TypeOfTheDays) -> Color {
         if type == .normalDay {
-            return .white
+            return Colors.gray_50
         } else if type == .anotherMonth {
-            return .white
+            return Colors.gray_50
         } else if type == .fertileDays {
             return Colors.blue_200
         } else if type == .periodDays {
             return Colors.red_200
         } else {
-            return .white
+            return Colors.gray_50
         }
     }
 
@@ -232,7 +243,7 @@ struct DaysComponent: View {
         } else if type == .periodDays {
             return Colors.red_200
         }
-        return .white
+        return Colors.gray_50
     }
 }
 

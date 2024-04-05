@@ -10,20 +10,24 @@ import SwiftData
 import SwiftUI
 
 struct ContentView: View {
-    @State var cycleService: CycleService
-    // @Environment(\.modelContext) private var modelContext
+//    @State var cycleService: CycleService
+//    @Environment(\.modelContext) private var modelContext
 
-    init(context: ModelContext) {
-        let cycleService = CycleService(context: context)
-        _cycleService = State(initialValue: cycleService)
-    }
+//    init(context: ModelContext) {
+//        let cycleService = CycleService(context: context)
+//        _cycleService = State(initialValue: cycleService)
+//    }
 
     @State var date: Date = .init()
 
     var body: some View {
-        let cycle = cycleService.createCycle()
-        SelectedFrame(cycle: cycle, selectionType: .symptons, date: Date())
-        SelectedFrame(cycle: cycle, selectionType: .mood, date: Date())
+        NavigationView {
+            List {
+                NavigationLink(destination: CalendarView(date: $date)) {
+                    Label("Calendar", systemImage: "calendar")
+                }
+            }.listStyle(.sidebar)
+        }
     }
 }
 

@@ -5,12 +5,13 @@
 //  Created by Luis Silva on 25/03/24.
 //
 
+import Assets
 import BackendLib
 import Foundation
 import SwiftUI
 
 struct CalendarComponent: View {
-    @State var cycleService: CycleService
+//    @State var cycleService: CycleService
 
     @State var month: Int
     @State var year: Int
@@ -21,6 +22,8 @@ struct CalendarComponent: View {
         ZStack {
             RoundedRectangle(cornerRadius: 30)
                 .frame(width: 660, height: 644)
+//                .foregroundColor(Colors.gray_100)
+                .foregroundColor(.white)
 
             VStack(alignment: .leading, spacing: 40) {
                 VStack(spacing: 15) {
@@ -28,33 +31,27 @@ struct CalendarComponent: View {
                     VStack(spacing: 8) {
                         let day = getTheWeekDayFromTheFirstDayOfTheMonth(month, year) ?? 0
 
-                        FirstLineDaysComponent(cycleService: cycleService,
-                                               day: day,
+                        FirstLineDaysComponent(day: day,
                                                month: month,
                                                year: year,
                                                date: $date)
-                        OthersLineDaysComponent(cycleService: cycleService,
-                                                day: day + 7,
+                        OthersLineDaysComponent(day: day + 7,
                                                 month: month,
                                                 year: year,
                                                 date: $date)
-                        OthersLineDaysComponent(cycleService: cycleService,
-                                                day: day + 14,
+                        OthersLineDaysComponent(day: day + 14,
                                                 month: month,
                                                 year: year,
                                                 date: $date)
-                        OthersLineDaysComponent(cycleService: cycleService,
-                                                day: day + 21,
+                        OthersLineDaysComponent(day: day + 21,
                                                 month: month,
                                                 year: year,
                                                 date: $date)
-                        OthersLineDaysComponent(cycleService: cycleService,
-                                                day: day + 28,
+                        OthersLineDaysComponent(day: day + 28,
                                                 month: month,
                                                 year: year,
                                                 date: $date)
-                        OthersLineDaysComponent(cycleService: cycleService,
-                                                day: day + 35, month: month,
+                        OthersLineDaysComponent(day: day + 35, month: month,
                                                 year: year,
                                                 date: $date)
                     }

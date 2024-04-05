@@ -62,7 +62,7 @@ struct SelectedFrame: View {
                 ScrollView([.horizontal], showsIndicators: false) {
                     HStack(spacing: 12) {
                         ForEach(selectedElements, id: \.self) { _ in
-                            Images.pikachu.swiftUIImage
+                            Images.moodConfused.swiftUIImage
                                 .resizable()
                                 .frame(width: 60, height: 60)
                                 .clipShape(Circle())

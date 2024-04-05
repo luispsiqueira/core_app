@@ -39,8 +39,9 @@ struct CoreApp: App {
     var body: some Scene {
         WindowGroup {
             BackendProvider {
-                ContentView(context: container.mainContext)
+                ContentView()
             }.modelContainer(container)
+                .preferredColorScheme(.light)
         }
     }
 }
