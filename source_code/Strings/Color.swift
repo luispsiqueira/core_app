@@ -1,5 +1,5 @@
 //
-//  ColorName.swift
+//  Color.swift
 //  core_app
 //
 //  Created by Clissia Bozzer Bovi on 02/04/24.
