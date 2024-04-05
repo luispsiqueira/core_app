@@ -15,8 +15,9 @@ struct SelectedFrame: View {
     @State private var listElements: [SelectionElement] = []
     @State private var buttonText = "Adicionar sintoma"
     @State private var titleText = "Seus sintomas de hoje"
-    @State var cycle: Cycle
 
+    var cycle: Cycle
+    var cycleService: CycleService
     let selectionType: SelectionType
     let date: Date
 
@@ -27,26 +28,12 @@ struct SelectedFrame: View {
         titleText = data.titleText
     }
 
-    private func save() {
-        switch selectionType {
-        case .symptons:
-            saveSymptom()
-        case .mood:
-            saveMood()
-        }
+    private func getDate() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = .current
+        dateFormatter.dateFormat = "EEEE, dd MMMM yyyy"
+        return dateFormatter.string(from: date)
     }
-
-    private func saveSymptom() {
-        var symptonsArray: [CycleSymptom] = []
-        for index in 0 ..< selectedElements.count {
-            let text = selectedElements[index].selectionName
-            let sympthom = CycleSymptom(day: date, symptom: SymptomCorrelation.getSymptomType(text))
-            symptonsArray.append(sympthom)
-        }
-        cycle.sympthoms? = symptonsArray
-    }
-
-    private func saveMood() {}
 
     var body: some View {
         VStack(spacing: 16) {
@@ -62,7 +49,7 @@ struct SelectedFrame: View {
                 ScrollView([.horizontal], showsIndicators: false) {
                     HStack(spacing: 12) {
                         ForEach(selectedElements, id: \.self) { _ in
-                            Images.pikachu.swiftUIImage
+                            Images.moodConfused.swiftUIImage
                                 .resizable()
                                 .frame(width: 60, height: 60)
                                 .clipShape(Circle())
@@ -88,7 +75,11 @@ struct SelectedFrame: View {
                 .popover(isPresented: $isPopoverPresented, arrowEdge: .trailing) {
                     SelectionPopUp(selection: $selectedElements,
                                    listElements: $listElements,
-                                   selectedElements: selectedElements)
+                                   dateString: getDate(),
+                                   cycle: cycle,
+                                   cycleService: cycleService,
+                                   selectionType: selectionType,
+                                   date: date)
                         .frame(width: 300, height: 400)
                         .interactiveDismissDisabled()
                 }

@@ -9,8 +9,6 @@ import BackendLib
 import SwiftUI
 
 struct FirstLineDaysComponent: View {
-    @State var cycleService: CycleService
-
     var day: Int
     var month: Int
     var year: Int
@@ -20,7 +18,6 @@ struct FirstLineDaysComponent: View {
     var body: some View {
         HStack(spacing: 31) {
             WeekDaysComponent(
-                cycleService: cycleService,
                 day: day + WeekDaysNumber.sunday.rawValue,
                 month: month,
                 year: year,
@@ -28,7 +25,6 @@ struct FirstLineDaysComponent: View {
                 date: $date
             )
             WeekDaysComponent(
-                cycleService: cycleService,
                 day: day + WeekDaysNumber.monday.rawValue,
                 month: month,
                 year: year,
@@ -36,7 +32,6 @@ struct FirstLineDaysComponent: View {
                 date: $date
             )
             WeekDaysComponent(
-                cycleService: cycleService,
                 day: day + WeekDaysNumber.tuesday.rawValue,
                 month: month,
                 year: year,
@@ -44,7 +39,6 @@ struct FirstLineDaysComponent: View {
                 date: $date
             )
             WeekDaysComponent(
-                cycleService: cycleService,
                 day: day + WeekDaysNumber.wednesday.rawValue,
                 month: month,
                 year: year,
@@ -52,7 +46,6 @@ struct FirstLineDaysComponent: View {
                 date: $date
             )
             WeekDaysComponent(
-                cycleService: cycleService,
                 day: day + WeekDaysNumber.thuesday.rawValue,
                 month: month,
                 year: year,
@@ -60,7 +53,6 @@ struct FirstLineDaysComponent: View {
                 date: $date
             )
             WeekDaysComponent(
-                cycleService: cycleService,
                 day: day + WeekDaysNumber.friday.rawValue,
                 month: month,
                 year: year,
@@ -68,7 +60,6 @@ struct FirstLineDaysComponent: View {
                 date: $date
             )
             WeekDaysComponent(
-                cycleService: cycleService,
                 day: day + WeekDaysNumber.saturday.rawValue,
                 month: month,
                 year: year,

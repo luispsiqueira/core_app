@@ -9,8 +9,6 @@ import BackendLib
 import SwiftUI
 
 struct CalendarView: View {
-    @State var cycleService: CycleService
-
     var userName: String = "Julia"
     @Binding var date: Date
 
@@ -24,10 +22,11 @@ struct CalendarView: View {
                 Text("Hello, \(userName)")
                     .font(.largeTitle)
 
-                CalendarComponent(cycleService: cycleService,
-                                  month: monthToPass,
+                CalendarComponent(month: monthToPass,
                                   year: yearToPass,
                                   date: $date)
+
+                CycleMomentComponent(phase: .period)
             }
         }
 //        }

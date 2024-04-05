@@ -9,48 +9,46 @@ import BackendLib
 import SwiftUI
 
 struct OthersLineDaysComponent: View {
-    @State var cycleService: CycleService
-
     var day: Int
     var month: Int
     var year: Int
-//    @Environment(\.modelContext) private var modelContext
+    @Environment(\.modelContext) private var modelContext
 
     @Binding var date: Date
 
     var body: some View {
         HStack(spacing: 31) {
-            DaysComponent(cycleService: cycleService,
+            DaysComponent(context: modelContext,
                           day: day + WeekDaysNumber.sunday.rawValue,
                           month: month,
                           year: year,
                           date: $date)
-            DaysComponent(cycleService: cycleService,
+            DaysComponent(context: modelContext,
                           day: day + WeekDaysNumber.monday.rawValue,
                           month: month,
                           year: year,
                           date: $date)
-            DaysComponent(cycleService: cycleService,
+            DaysComponent(context: modelContext,
                           day: day + WeekDaysNumber.tuesday.rawValue,
                           month: month,
                           year: year,
                           date: $date)
-            DaysComponent(cycleService: cycleService,
+            DaysComponent(context: modelContext,
                           day: day + WeekDaysNumber.wednesday.rawValue,
                           month: month,
                           year: year,
                           date: $date)
-            DaysComponent(cycleService: cycleService,
+            DaysComponent(context: modelContext,
                           day: day + WeekDaysNumber.thuesday.rawValue,
                           month: month,
                           year: year,
                           date: $date)
-            DaysComponent(cycleService: cycleService,
+            DaysComponent(context: modelContext,
                           day: day + WeekDaysNumber.friday.rawValue,
                           month: month,
                           year: year,
                           date: $date)
-            DaysComponent(cycleService: cycleService,
+            DaysComponent(context: modelContext,
                           day: day + WeekDaysNumber.saturday.rawValue,
                           month: month,
                           year: year,

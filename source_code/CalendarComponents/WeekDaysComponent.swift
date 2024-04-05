@@ -10,8 +10,7 @@ import BackendLib
 import SwiftUI
 
 struct WeekDaysComponent: View {
-    @State var cycleService: CycleService
-
+    @Environment(\.modelContext) private var modelContext
     var day: Int
     var month: Int
     var year: Int
@@ -22,10 +21,10 @@ struct WeekDaysComponent: View {
     var body: some View {
         VStack(spacing: 20) {
             Text("\(weekDay.rawValue)")
-                .colorMultiply(Colors.gray_800)
+                .foregroundColor(Colors.gray_800)
                 .font(.system(size: 14))
             DaysComponent(
-                cycleService: cycleService,
+                context: modelContext,
                 day: day,
                 month: month,
                 year: year,

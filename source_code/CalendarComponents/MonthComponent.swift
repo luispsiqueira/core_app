@@ -25,16 +25,16 @@ struct MonthComponent: View {
                 }) {
                     Image(systemName: "chevron.backward")
                         .font(.system(size: 16))
-                        .colorMultiply(Colors.gray_800)
+                        .foregroundColor(Colors.gray_800)
                 }.buttonBorderShape(.circle)
 
                 VStack {
                     Text(getMonthName(month) ?? "January")
-                        .colorMultiply(Colors.purple_400)
+                        .foregroundColor(Colors.purple_400)
                         .font(.system(size: 26))
                     Text(String(year))
                         .font(.system(size: 16))
-                        .colorMultiply(Colors.gray_800)
+                        .foregroundColor(Colors.gray_800)
                 }
 
                 Button(action: {
@@ -47,7 +47,7 @@ struct MonthComponent: View {
                 }) {
                     Image(systemName: "chevron.forward")
                         .font(.system(size: 16))
-                        .colorMultiply(Colors.gray_800)
+                        .foregroundColor(Colors.gray_800)
                 }.buttonBorderShape(.circle)
             }
         }
