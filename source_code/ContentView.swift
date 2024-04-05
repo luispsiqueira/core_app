@@ -18,8 +18,7 @@ struct ContentView: View {
     }
 
     var body: some View {
-        let cycle = cycleService.createCycle()
-        SelectedFrame(cycle: cycle, selectionType: .symptons, date: Date())
-        SelectedFrame(cycle: cycle, selectionType: .mood, date: Date())
+        let cycle = cycleService.createCycle(startDate: Date(), endDate: Date())
+        SelectedFrame(cycle: cycle, cycleService: cycleService, selectionType: .symptons, date: Date())
     }
 }

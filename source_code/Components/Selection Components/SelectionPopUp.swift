@@ -5,27 +5,70 @@
 //  Created by Clissia Bozzer Bovi on 25/03/24.
 //
 
+import BackendLib
 import SwiftUI
 
 struct SelectionPopUp: View {
     @Environment(\.dismiss) var dismiss
     @Binding var selection: [SelectionElement]
     @Binding var listElements: [SelectionElement]
-    @State var selectedElements: [SelectionElement] = []
-    @State var removedElements: [SelectionElement] = []
+    @State private var selectedElements: [SelectionElement] = []
+    @State private var removedElements: [SelectionElement] = []
+    @State var dateString: String
 
+    var cycle: Cycle
+    var cycleService: CycleService
     let columns = [GridItem(.flexible())]
-    var popOverText = "Thursday, 14 March 2024"
+    let selectionType: SelectionType
+    let date: Date
 
-    private func deleteElement(_ index: Int) {
-        let elementOnSelection = listElements[index]
-        let indexOfElement = selectedElements.firstIndex(of: elementOnSelection) ?? 0
-        selectedElements.remove(at: indexOfElement)
+    private func passToFrame() {
+        for element in selectedElements {
+            selection.append(element)
+        }
+
+        for element in removedElements {
+            let name = element.selectionName
+            if let index = selection.firstIndex(where: { $0.selectionName == name }) {
+                selection.remove(at: index)
+            }
+        }
     }
+
+    private func save() {
+        switch selectionType {
+        case .symptons:
+            saveSymptom()
+            deleteSymptom()
+        case .mood:
+            saveMood()
+            deleteMood()
+        }
+    }
+
+    private func deleteSymptom() {
+        for index in 0 ..< removedElements.count {
+            let text = removedElements[index].selectionName
+            let sympthomType = SymptomCorrelation.getSymptomType(text)
+            cycleService.removeSympthom(cycle: cycle, symptom: sympthomType, date: date)
+        }
+    }
+
+    private func deleteMood() {}
+
+    private func saveSymptom() {
+        for index in 0 ..< selectedElements.count {
+            let text = selectedElements[index].selectionName
+            let sympthomType = SymptomCorrelation.getSymptomType(text)
+            cycleService.addSymptom(cycle: cycle, symptom: sympthomType, date: date)
+        }
+    }
+
+    private func saveMood() {}
 
     var body: some View {
         VStack(alignment: .leading) {
-            Text(popOverText)
+            Text(dateString)
                 .font(.title3)
                 .padding(.horizontal)
                 .foregroundColor(Color(ColorName.Label))
@@ -35,9 +78,8 @@ struct SelectionPopUp: View {
             ScrollView {
                 LazyVGrid(columns: columns, spacing: 36) {
                     ForEach(listElements, id: \.self) { element in
-                        let receivedElement = element
-                        let index = listElements.firstIndex(of: receivedElement) ?? 0
-                        let didTapElement = receivedElement.didTap
+                        let index = listElements.firstIndex(of: element) ?? 0
+                        let didTapElement = element.didTap
                         HStack(spacing: 10) {
                             Circle()
                                 .size(CGSize(width: 20, height: 20))
@@ -57,9 +99,9 @@ struct SelectionPopUp: View {
                         .onTapGesture {
                             listElements[index].tap()
                             if didTapElement {
-                                deleteElement(index)
+                                removedElements.append(listElements[index])
                             } else {
-                                selectedElements.append(receivedElement)
+                                selectedElements.append(listElements[index])
                             }
                         }
                     }
@@ -69,8 +111,9 @@ struct SelectionPopUp: View {
             }
             Divider()
             Button {
+                save()
+                passToFrame()
                 dismiss()
-                selection = selectedElements
             } label: {
                 Text("Concluído")
             }
