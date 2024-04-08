@@ -44,11 +44,11 @@ struct MonthComponent: View {
                         month = 1
                         year += 1
                     }
-                }) {
+                }, label: {
                     Image(systemName: "chevron.forward")
                         .font(.system(size: 16))
                         .foregroundColor(Colors.gray_800)
-                }.buttonBorderShape(.circle)
+                }).buttonBorderShape(.circle)
             }
         }
     }

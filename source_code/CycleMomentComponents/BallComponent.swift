@@ -21,7 +21,8 @@ struct BallComponent: View {
         let colorOftheLine = colorOfTheLine(phase)
         let colorBetween = colorOfTheBetweenBall(phase)
         let colorInside = colorOfTheInsideBall(phase)
-        let durationOfTheCompleteCycle = CycleCalculation().calculateDurationOfTheCycle(cycleService.cycles.sorted(by: { $0.startDate < $1.startDate }))
+        let durationOfTheCompleteCycle = CycleCalculation().calculateDurationOfTheCycle(
+            cycleService.cycles.sorted(by: { $0.startDate < $1.startDate }))
 
         ZStack {
             Circle()

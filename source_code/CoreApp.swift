@@ -35,13 +35,17 @@ struct CoreApp: App {
     var dayToPass = Calendar.current.component(.day, from: Date())
     var monthToPass = Calendar.current.component(.month, from: Date())
     var yearToPass = Calendar.current.component(.year, from: Date())
+    @State var date: Date = .init()
 
     var body: some Scene {
         WindowGroup {
             BackendProvider {
-                ContentView()
-            }.modelContainer(container)
+                NavigationView {
+                    ContentView()
+                }
+                .modelContainer(container)
                 .preferredColorScheme(.light)
+            }
         }
     }
 }

@@ -11,13 +11,6 @@ import SwiftUI
 
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
-//    @State var cycleService: CycleService
-//    @Environment(\.modelContext) private var modelContext
-
-//    init(context: ModelContext) {
-//        let cycleService = CycleService(context: context)
-//        _cycleService = State(initialValue: cycleService)
-//    }
 
     @State var date: Date = .init()
 
@@ -32,11 +25,5 @@ struct ContentView: View {
                 }
             }.listStyle(.sidebar)
         }
-        // let cycle = cycleService.createCycle(startDate: Date(), endDate: Date())
-        // SelectedFrame(cycle: cycle, cycleService: cycleService, selectionType: .symptons, date: Date())
     }
 }
-
-// #Preview {
-//    ContentView()
-// }
