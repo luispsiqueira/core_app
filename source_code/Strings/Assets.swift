@@ -1,5 +1,5 @@
 //
-//  AssetsName.swift
+//  Assets.swift
 //  core_app
 //
 //  Created by Clissia Bozzer Bovi on 28/03/24.

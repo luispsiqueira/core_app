@@ -25,17 +25,27 @@ struct CoreApp: App {
                 Period.self,
                 CycleSymptom.self
             )
+//            container.deleteAllData()
 
         } catch {
             fatalError("Failed to create ModelContainer")
         }
     }
 
+    var dayToPass = Calendar.current.component(.day, from: Date())
+    var monthToPass = Calendar.current.component(.month, from: Date())
+    var yearToPass = Calendar.current.component(.year, from: Date())
+    @State var date: Date = .init()
+
     var body: some Scene {
         WindowGroup {
             BackendProvider {
-                ContentView(context: container.mainContext)
-            }.modelContainer(container)
+                NavigationView {
+                    SideBarView(date: $date)
+                }
+                .modelContainer(container)
+                .preferredColorScheme(.light)
+            }
         }
     }
 }
