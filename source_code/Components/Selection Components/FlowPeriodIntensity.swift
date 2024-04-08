@@ -48,7 +48,7 @@ struct FlowPeriodIntensity: View {
             }
         }
         .padding(.leading, 20)
-        .frame(width: 450, height: 155)
+        .frame(width: 340, height: 155)
         .background(Color.white) // Define o fundo do HStack como branco
         .cornerRadius(10.0)
     }
