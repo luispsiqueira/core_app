@@ -115,12 +115,10 @@ struct DaysComponent: View {
         if today < Date() {
             for cycle in cycleService.cycles {
                 if cycle.startDate <= today &&
-                    Calendar.current.date(byAdding: .day, value: 5, to: cycle.startDate) ?? today >= today
-                {
+                    Calendar.current.date(byAdding: .day, value: 5, to: cycle.startDate) ?? today >= today {
                     return .periodDays
                 } else if Calendar.current.date(byAdding: .day, value: -13, to: cycle.startDate) ?? today <= today &&
-                    Calendar.current.date(byAdding: .day, value: -7, to: cycle.startDate) ?? today >= today
-                {
+                    Calendar.current.date(byAdding: .day, value: -7, to: cycle.startDate) ?? today >= today {
                     return .fertileDays
                 }
             }
@@ -184,7 +182,11 @@ struct DaysComponent: View {
         }
     }
 
-    func defineDayToUse(_ day: Int, _ month: Int, _ year: Int, _ lastDay: Int, _ arrange: ArrangeDaysComponent) -> (Int, Int, Int) {
+    func defineDayToUse(_ day: Int,
+                        _ month: Int,
+                        _ year: Int,
+                        _ lastDay: Int,
+                        _ arrange: ArrangeDaysComponent) -> (Int, Int, Int) {
         switch arrange {
         case .normalDay:
             return (day, month, year)
@@ -235,8 +237,7 @@ struct DaysComponent: View {
     func checkIfDayIsToday(_ day: Int, _ month: Int, _ year: Int, _ type: TypeOfTheDays) -> Color {
         if Calendar.current.component(.day, from: Date()) == day &&
             Calendar.current.component(.month, from: Date()) == month &&
-            Calendar.current.component(.year, from: Date()) == year
-        {
+            Calendar.current.component(.year, from: Date()) == year {
             return Colors.purple_600
         } else if type == .fertileDays {
             return Colors.blue_200

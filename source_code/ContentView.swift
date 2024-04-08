@@ -10,6 +10,7 @@ import SwiftData
 import SwiftUI
 
 struct ContentView: View {
+    @Environment(\.modelContext) private var modelContext
 //    @State var cycleService: CycleService
 //    @Environment(\.modelContext) private var modelContext
 
@@ -26,10 +27,13 @@ struct ContentView: View {
                 NavigationLink(destination: CalendarView(date: $date)) {
                     Label("Calendar", systemImage: "calendar")
                 }
+                NavigationLink(destination: CycleMomentComponent(context: modelContext)) {
+                    Label("Teste", systemImage: "")
+                }
             }.listStyle(.sidebar)
         }
-        //let cycle = cycleService.createCycle(startDate: Date(), endDate: Date())
-        //SelectedFrame(cycle: cycle, cycleService: cycleService, selectionType: .symptons, date: Date())
+        // let cycle = cycleService.createCycle(startDate: Date(), endDate: Date())
+        // SelectedFrame(cycle: cycle, cycleService: cycleService, selectionType: .symptons, date: Date())
     }
 }
 

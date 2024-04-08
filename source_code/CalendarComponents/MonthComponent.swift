@@ -22,11 +22,11 @@ struct MonthComponent: View {
                         month = 12
                         year -= 1
                     }
-                }) {
+                }, label: {
                     Image(systemName: "chevron.backward")
                         .font(.system(size: 16))
                         .foregroundColor(Colors.gray_800)
-                }.buttonBorderShape(.circle)
+                }).buttonBorderShape(.circle)
 
                 VStack {
                     Text(getMonthName(month) ?? "January")

@@ -54,8 +54,7 @@ struct CycleCalculation {
             if today > dateOfStartOfNextCycle {
                 if today < Calendar.current.date(byAdding: .day,
                                                  value: durationOfThePeriod,
-                                                 to: dateOfStartOfNextCycle) ?? Date()
-                {
+                                                 to: dateOfStartOfNextCycle) ?? Date() {
                     return true
                 }
             }
@@ -74,8 +73,7 @@ struct CycleCalculation {
                                                            value: duration,
                                                            to: startOfLastCycle) ?? Date()
         if Calendar.current.date(byAdding: .day, value: -13, to: dateOfStartOfNextCycle) ?? today <= today &&
-            Calendar.current.date(byAdding: .day, value: -7, to: dateOfStartOfNextCycle) ?? today >= today
-        {
+            Calendar.current.date(byAdding: .day, value: -7, to: dateOfStartOfNextCycle) ?? today >= today {
             return true
         }
         return false
