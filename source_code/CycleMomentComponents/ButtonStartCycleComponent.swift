@@ -13,7 +13,7 @@ import SwiftData
 struct ButtonStartCycleComponent: View {
     @State var cycleService: CycleService
     @State var isShowingPopover: Bool = false
-    @State var isToggleOn: Bool = false // precisa colocar esse toggle vindo do banco de dados
+    @State var isToggleOn: Bool = false 
     var date: Date
     init(context: ModelContext, date: Date) {
         self.date = date
@@ -74,14 +74,12 @@ struct ButtonStartCycleComponent: View {
     func operationOfTheToggleButton(_ isToggleOn: Bool) {
         let cyclesSorted = cycleService.cycles.sorted(by: { $0.startDate < $1.startDate })
         let duration = CycleCalculation().calculateDurationOfTheCycle(cyclesSorted)
-        guard let startOfLastCycle = cyclesSorted.last?.startDate else { return }
         if isToggleOn {
+            cyclesSorted.last?.endDate = Calendar.current.date(byAdding: .day, value: -1, to: date) ?? Date()
             _ = cycleService.createCycle(startDate: date,
                                              endDate: Calendar.current.date(byAdding: .day,
                                                                             value: duration,
                                                                             to: date) ?? Date())
-        } else if !isToggleOn {
-            cyclesSorted.last?.endDate = date
         }
     }
     func  getTheMonthNameBasedOnTheNumber(_ month: Int) -> String {
