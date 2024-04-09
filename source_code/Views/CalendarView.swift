@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CalendarView: View {
     @Binding var date: Date
-
+    @Environment(\.modelContext) private var modelContext
     var monthToPass = Calendar.current.component(.month, from: Date())
     var yearToPass = Calendar.current.component(.year, from: Date())
 
@@ -29,15 +29,7 @@ struct CalendarView: View {
                                           year: yearToPass,
                                           date: $date)
 
-                        VStack(alignment: .leading) {
-                            // Begin cycle
-                            RoundedRectangle(cornerRadius: 10)
-                                .frame(width: 142, height: 78)
-
-                            // Current cycle phase
-                            RoundedRectangle(cornerRadius: 10)
-                                .frame(width: 317, height: 281)
-                        }
+                        
                     }
                     .padding(.bottom, 32)
 
@@ -49,23 +41,8 @@ struct CalendarView: View {
                     Text("Personal Records")
                         .font(.system(.title2))
 
-                    HStack {
-                        // Calendar
-                        RoundedRectangle(cornerRadius: 10)
-                            .frame(width: 460, height: 370)
-
-                        VStack(alignment: .leading) {
-                            // Begin cycle
-                            RoundedRectangle(cornerRadius: 10)
-                                .frame(width: 142, height: 78)
-
-                            // Current cycle phase
-                            RoundedRectangle(cornerRadius: 10)
-                                .frame(width: 317, height: 281)
-                        }
-                    }
-
                     Spacer()
+                    ButtonStartCycleComponent(context: modelContext, date: date)
                 }
                 .padding()
 

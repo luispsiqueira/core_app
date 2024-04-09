@@ -11,7 +11,7 @@
 
 import SwiftUI
 
-struct CalendarView: View {
+struct CalendarViewOld2: View {
     @Binding var date: Date
     @Environment(\.modelContext) private var modelContext
     var monthToPass = Calendar.current.component(.month, from: Date())
