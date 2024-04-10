@@ -14,7 +14,7 @@ struct MonthComponent: View {
 
     var body: some View {
         ZStack {
-            HStack {
+            HStack(spacing: 121) {
                 Button(action: {
                     if month - 1 > 0 {
                         month -= 1
@@ -28,15 +28,6 @@ struct MonthComponent: View {
                         .foregroundColor(Colors.gray_800)
                 }).buttonBorderShape(.circle)
 
-                VStack {
-                    Text(getMonthName(month) ?? "January")
-                        .foregroundColor(Colors.purple_400)
-                        .font(.system(size: 26))
-                    Text(String(year))
-                        .font(.system(size: 16))
-                        .foregroundColor(Colors.gray_800)
-                }
-
                 Button(action: {
                     if month + 1 < 13 {
                         month += 1
@@ -49,6 +40,15 @@ struct MonthComponent: View {
                         .font(.system(size: 16))
                         .foregroundColor(Colors.gray_800)
                 }).buttonBorderShape(.circle)
+            }
+            
+            VStack {
+                Text(getMonthName(month) ?? "January")
+                    .foregroundColor(Colors.purple_400)
+                    .font(.system(size: 26))
+                Text(String(year))
+                    .font(.system(size: 16))
+                    .foregroundColor(Colors.gray_800)
             }
         }
     }
